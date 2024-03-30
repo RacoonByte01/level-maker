@@ -49,6 +49,21 @@ public class PVector {
     }
 
     /**
+     * This function can substract another PVector
+     * 
+     * @param sum
+     */
+    public void sub(PVector sub) {
+        x += sub.x;
+        y += sub.y;
+        /*
+         * If you try to sub a tridimensional PVector with bidimensonal PVector,
+         * or vice versa you gona get a excption so you should be carefully
+         */
+        z += sub.z;
+    }
+
+    /**
      * This function can set the limit of this Vector
      * TODO Make it to work with tridimensional vector
      * 

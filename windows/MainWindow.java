@@ -30,7 +30,7 @@ public class MainWindow extends JFrame implements Runnable {
     Mouse mouse;
 
     // Estado
-    State state;
+    public State state;
     // Calcular fps
     private final int FPS;
     private double targetTime;
