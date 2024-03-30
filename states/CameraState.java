@@ -15,7 +15,7 @@ import settings.Settings;
  * @version 1.0
  */
 public class CameraState extends State {
-    PVector loc, lastClick;
+    protected PVector loc, lastClick;
     boolean isPressed;
 
     public CameraState() {
@@ -25,20 +25,7 @@ public class CameraState extends State {
 
     @Override
     public void update() {
-        if (Mouse.mousePressed && Mouse.right) {
-            if (!isPressed) {
-                lastClick = new PVector(Mouse.x, Mouse.y);
-                isPressed = true;
-            }
-        } else {
-            lastClick = null;
-            isPressed = false;
-        }
-        if (lastClick != null) {
-            // System.out.println(loc.x + " // " + loc.y);
-            loc.add(new PVector(Mouse.x - lastClick.x, Mouse.y - lastClick.y));
-            lastClick = new PVector(Mouse.x, Mouse.y);
-        }
+        camera();
     }
 
     @Override
@@ -53,4 +40,19 @@ public class CameraState extends State {
         g.fillRect(0, 0, 100, 100);
     }
 
+    protected void camera() {
+        if (Mouse.mousePressed && Mouse.right) {
+            if (!isPressed) {
+                lastClick = new PVector(Mouse.x, Mouse.y);
+                isPressed = true;
+            }
+        } else {
+            lastClick = null;
+            isPressed = false;
+        }
+        if (lastClick != null) {
+            loc.add(new PVector(Mouse.x - lastClick.x, Mouse.y - lastClick.y));
+            lastClick = new PVector(Mouse.x, Mouse.y);
+        }
+    }
 }

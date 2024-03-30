@@ -10,6 +10,12 @@ import windows.MainWindow;
  */
 public class Main {
     public static void main(String[] args) {
-        new MainWindow().start();
+        MainWindow mainWindow = new MainWindow();
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            System.out.println(e);
+        }
+        mainWindow.start();
     }
 }
