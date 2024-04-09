@@ -142,7 +142,7 @@ public class MainWindow extends JFrame implements Runnable {
     public void start() {
         funcionar = true;
         thread = new Thread(this);
-        State.setActualState(new LoggingState());
+        State.setActualState(new GameState(null));
 
         state = State.getActualState();
         thread.start();

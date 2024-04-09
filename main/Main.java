@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args) {
         MainWindow mainWindow = new MainWindow();
         try {
-            Thread.sleep(100);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             System.out.println(e);
         }
