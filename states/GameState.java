@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gameObjects.Cube;
-import gameObjects.DinamicCube;
-import inputs.Mouse;
+import gameObjects.Player;
 import raccoon.PVector;
 import settings.Settings;
 
@@ -36,14 +35,58 @@ public class GameState extends State {
             GameState.grid = new ArrayList<>();
         }
         /* Work in progress */
-        GameState.grid.add(new DinamicCube(new PVector(0, 0), new Color(255, 255, 255)));
-        for (int i = 0; i < 10; i++) {
-            GameState.grid.add(new Cube(new PVector(1 + i * 2, 5), new Color(255, 0, 0)));
+        GameState.grid.add(
+                new Player(
+                        new PVector(Settings.width / 2 / Settings.cellSize,
+                                Settings.height / 2 / Settings.cellSize - 1),
+                        new Color(255, 255, 255)));
+        for (int i = 0; i < Settings.width / Settings.cellSize; i++) {
+            GameState.grid.add(new Cube(new PVector(i, Settings.height / 2 / Settings.cellSize), new Color(255, 0, 0)));
         }
+        // for (int i = 0; i < Settings.width / Settings.cellSize; i++) {
+        // GameState.grid
+        // .add(new Cube(new PVector(i, Settings.height / 2 / Settings.cellSize - 3),
+        // new Color(255, 0, 0)));
+        // }
+        GameState.grid.add(new Cube(
+                new PVector(Settings.width / 2 / Settings.cellSize + 5, Settings.height / 2 / Settings.cellSize - 1),
+                new Color(255, 0, 0)));
+        GameState.grid.add(new Cube(
+                new PVector(Settings.width / 2 / Settings.cellSize + 5, Settings.height / 2 / Settings.cellSize - 2),
+                new Color(255, 0, 0)));
+        GameState.grid.add(new Cube(
+                new PVector(Settings.width / 2 / Settings.cellSize + 5, Settings.height / 2 / Settings.cellSize - 3),
+                new Color(255, 0, 0)));
+        GameState.grid.add(new Cube(
+                new PVector(Settings.width / 2 / Settings.cellSize + 5, Settings.height / 2 / Settings.cellSize - 4),
+                new Color(255, 0, 0)));
+
+        GameState.grid.add(new Cube(
+                new PVector(Settings.width / 2 / Settings.cellSize - 5, Settings.height / 2 / Settings.cellSize - 1),
+                new Color(255, 0, 0)));
+        GameState.grid.add(new Cube(
+                new PVector(Settings.width / 2 / Settings.cellSize - 5, Settings.height / 2 / Settings.cellSize - 2),
+                new Color(255, 0, 0)));
+        GameState.grid.add(new Cube(
+                new PVector(Settings.width / 2 / Settings.cellSize - 5, Settings.height / 2 / Settings.cellSize - 3),
+                new Color(255, 0, 0)));
+        GameState.grid.add(new Cube(
+                new PVector(Settings.width / 2 / Settings.cellSize - 5, Settings.height / 2 / Settings.cellSize - 4),
+                new Color(255, 0, 0)));
+        // for (int x = 1; x < 10; x++) {
+        // for (int y = 1; y < x; y++) {
+        // GameState.grid.add(
+        // new Cube(new PVector(x + Settings.width / 2 / Settings.cellSize,
+        // Settings.height / 2 / Settings.cellSize - y), new Color(255, 0, 0)));
+        // }
+        // }
+
     }
 
     @Override
     public void update() {
+        Player player = (Player) grid.get(0);
+        player.controls();
         for (Cube cube : grid) {
             cube.update();
         }
@@ -53,11 +96,11 @@ public class GameState extends State {
     public void draw(Graphics g) {
         g.setColor(new Color(0));
         g.fillRect(0, 0, Settings.width, Settings.height);
+        Player player = (Player) grid.get(0);
+        g.translate((int) -player.getLoc().x + Settings.width / 2, (int) -player.getLoc().y + Settings.height / 2);
         for (Cube cube : grid) {
             cube.draw(g);
         }
-        DinamicCube player = (DinamicCube) grid.get(0);
-        player.setLoc(new PVector(Mouse.x, Mouse.y));
     }
 
 }

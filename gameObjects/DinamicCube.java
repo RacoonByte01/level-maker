@@ -3,17 +3,26 @@ package gameObjects;
 import java.awt.Color;
 
 import raccoon.PVector;
+import settings.Settings;
 import states.GameState;
 
+/**
+ * Class DinamicCube
+ * 
+ * @author JaviLeL
+ * @version 1.0
+ */
 public class DinamicCube extends Cube {
     public PVector vel, acc;
     private Integer velLimit;
+    protected boolean canJump;
 
     public DinamicCube(PVector loc, Color col, Integer velLimit) {
         super(loc, col);
         vel = new PVector(0, 0);
         acc = new PVector(0, 0);
         this.velLimit = velLimit;
+        canJump = false;
     }
 
     public DinamicCube(PVector loc, Color col) {
@@ -25,30 +34,81 @@ public class DinamicCube extends Cube {
         vel.add(acc);
         if (velLimit != null) {
             vel.limit(velLimit);
+            if (vel.y >= velLimit) {
+                vel.y = velLimit;
+            }
         }
         loc.add(vel);
-        boolean colision = false;
+        fisicsColision();
+    }
+
+    /**
+     * This function return UP DOWN RIGTH LEFT
+     * If the colision is produce by any of this directions
+     * 
+     * @param otherCube
+     * @return result = UP DOWN RIGTH LEFT
+     */
+    private String typeColision(Cube otherCube) {
+        String result = null;
+        if (vel.x > 0) {
+            if ((this.loc.y > otherCube.loc.y) && (this.vel.y < 0) && !(this.loc.x < otherCube.loc.x)) {
+                result = "UP";
+            } else if ((this.loc.x + Settings.cellSize >= otherCube.loc.x) && (this.vel.x > 0)
+                    && !(this.loc.y < otherCube.loc.y)) {
+                result = "RIGHT";
+            } else if ((this.loc.y < otherCube.loc.y) && (this.vel.y > 0) && !(this.loc.x < otherCube.loc.x)) {
+                result = "DOWN";
+            }
+        } else if (vel.x < 0) {
+            if ((this.loc.y > otherCube.loc.y) && (this.vel.y < 0) && !(this.loc.x > otherCube.loc.x)) {
+                result = "UP";
+            } else if ((this.loc.x <= otherCube.loc.x + Settings.cellSize) && (this.vel.x < 0)
+                    && !(this.loc.y < otherCube.loc.y)) {
+                result = "LEFT";
+            } else if ((this.loc.y < otherCube.loc.y) && (this.vel.y > 0) && !(this.loc.x > otherCube.loc.x)) {
+                result = "DOWN";
+            }
+        } else {
+            if ((this.loc.y > otherCube.loc.y) && (this.vel.y < 0)) {
+                result = "UP";
+            } else if (((this.loc.y < otherCube.loc.y) && (this.vel.y > 0))) {
+                result = "DOWN";
+            }
+        }
+        return result;
+    }
+
+    protected void fisicsColision() {
         for (Cube cube : GameState.grid) {
             if (this != cube) {
                 if (this.isColision(cube)) {
-                    colision = true;
-                    cube.setColor(new Color(0, 255, 0));
-                } else {
-                    cube.setColor(new Color(255, 0, 0));
+                    if (typeColision(cube) != null) {
+                        switch (typeColision(cube)) {
+                            case "RIGHT":
+                                vel.x = 0;
+                                acc.x = 0;
+                                loc.x = cube.loc.x - Settings.cellSize - 1;
+                                break;
+                            case "LEFT":
+                                vel.x = 0;
+                                acc.x = 0;
+                                loc.x = cube.loc.x + Settings.cellSize + 1;
+                                break;
+                            case "DOWN":
+                                vel.y = 0;
+                                loc.y = cube.loc.y - Settings.cellSize;
+                                canJump = true;
+                                break;
+                            case "UP":
+                                vel.y = 0;
+                                loc.y = cube.loc.y + Settings.cellSize;
+                                break;
+                        }
+                    }
                 }
             }
         }
-        if (colision) {
-            setColor(new Color(255, 255, 0));
-            System.out.println("Si Colision :D");
-        } else {
-            setColor(new Color(255, 255, 255));
-            System.out.println("No Colision D:");
-        }
     }
 
-    /* beta test */
-    public void setLoc(PVector newLoc) {
-        loc = newLoc;
-    }
 }
