@@ -17,6 +17,7 @@ public class Player extends DinamicCube {
         super(loc, col, 30);
         // Where g = y
         this.acc = new PVector(0, .5f);
+
     }
 
     /**
@@ -24,16 +25,18 @@ public class Player extends DinamicCube {
      */
     public void controls() {
         vel.x = 0;
-        if (Keyboard.key != null && Keyboard.keyPressed) {
-            if (Character.toLowerCase(Keyboard.key) == 'a') {
-                vel.x = -10;
-            } else if (Character.toLowerCase(Keyboard.key) == 'd') {
-                vel.x = 10;
-            } else if (Character.toLowerCase(Keyboard.key) == ' ' && canJump) {
-                vel.y = -10;
-                canJump = false;
-            }
+
+        if (Keyboard.left) {
+            vel.x = -10;
         }
+        if (Keyboard.right) {
+            vel.x = 10;
+        }
+        if (Keyboard.jump && canJump) {
+            vel.y = -10;
+            canJump = false;
+        }
+
     }
 
     /**
