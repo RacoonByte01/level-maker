@@ -49,7 +49,7 @@ public class MainWindow extends JFrame implements Runnable {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
 
-        if (Settings.fullScreem) {
+        if (Settings.fullScreen) {
             this.setExtendedState(Frame.MAXIMIZED_BOTH);
             Settings.width = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
             Settings.height = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
