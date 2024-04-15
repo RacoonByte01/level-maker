@@ -43,4 +43,8 @@ public class Cube extends GameObjet {
     public void setColor(Color newColor) {
         col = newColor;
     }
+
+    public boolean isLoc(PVector otherLoc) {
+        return loc.x == otherLoc.x && loc.y == otherLoc.y;
+    }
 }
