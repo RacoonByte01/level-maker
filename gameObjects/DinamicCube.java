@@ -52,6 +52,7 @@ public class DinamicCube extends Cube {
     private String typeColision(Cube otherCube) {
         String result = null;
         if (vel.x > 0) {
+            // El 14 es la velocidad -1
             if ((this.loc.y <= otherCube.loc.y) && (this.vel.y > 0)
                     && !((int) this.loc.x + Settings.cellSize - 14 == (int) otherCube.loc.x)) {
                 result = "DOWN";
@@ -63,6 +64,7 @@ public class DinamicCube extends Cube {
             }
         } else if (vel.x < 0) {
             if ((this.loc.y <= otherCube.loc.y) && (this.vel.y > 0)
+
                     && !((int) this.loc.x == (int) otherCube.loc.x + Settings.cellSize - 14)) {
                 result = "DOWN";
             } else if ((this.loc.y > otherCube.loc.y) && (this.vel.y < 0) && !(this.loc.x > otherCube.loc.x)) {
