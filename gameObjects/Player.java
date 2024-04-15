@@ -16,7 +16,7 @@ public class Player extends DinamicCube {
     public Player(PVector loc, Color col) {
         super(loc, col, 30);
         // Where g = y
-        this.acc = new PVector(0, .5f);
+        this.acc = new PVector(0, 5f);
 
     }
 
@@ -27,13 +27,13 @@ public class Player extends DinamicCube {
         vel.x = 0;
 
         if (Keyboard.left) {
-            vel.x = -10;
+            vel.x = -15;
         }
         if (Keyboard.right) {
-            vel.x = 10;
+            vel.x = 15;
         }
         if (Keyboard.jump && canJump) {
-            vel.y = -10;
+            vel.y = -50;
             canJump = false;
         }
 

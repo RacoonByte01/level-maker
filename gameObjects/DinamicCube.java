@@ -52,25 +52,27 @@ public class DinamicCube extends Cube {
     private String typeColision(Cube otherCube) {
         String result = null;
         if (vel.x > 0) {
-            if ((this.loc.x + Settings.cellSize >= otherCube.loc.x)
-                    && !(this.loc.y + Settings.cellSize - 10 < otherCube.loc.y)) {
-                result = "RIGHT";
+            if ((this.loc.y <= otherCube.loc.y) && (this.vel.y > 0)
+                    && !((int) this.loc.x + Settings.cellSize - 14 == (int) otherCube.loc.x)) {
+                result = "DOWN";
             } else if ((this.loc.y > otherCube.loc.y) && (this.vel.y < 0) && !(this.loc.x < otherCube.loc.x)) {
                 result = "UP";
-            } else if ((this.loc.y <= otherCube.loc.y) && (this.vel.y > 0) && !(this.loc.x < otherCube.loc.x)) {
-                result = "DOWN";
+            } else if ((this.loc.x + Settings.cellSize >= otherCube.loc.x)
+                    && !(this.loc.y + Settings.cellSize - 10 < otherCube.loc.y)) {
+                result = "RIGHT";
             }
         } else if (vel.x < 0) {
-            if ((this.loc.x <= otherCube.loc.x + Settings.cellSize)
-                    && !(this.loc.y + Settings.cellSize - 10 < otherCube.loc.y)) {
-                result = "LEFT";
+            if ((this.loc.y <= otherCube.loc.y) && (this.vel.y > 0)
+                    && !((int) this.loc.x == (int) otherCube.loc.x + Settings.cellSize - 14)) {
+                result = "DOWN";
             } else if ((this.loc.y > otherCube.loc.y) && (this.vel.y < 0) && !(this.loc.x > otherCube.loc.x)) {
                 result = "UP";
-            } else if ((this.loc.y <= otherCube.loc.y) && (this.vel.y > 0) && !(this.loc.x > otherCube.loc.x)) {
-                result = "DOWN";
+            } else if ((this.loc.x <= otherCube.loc.x + Settings.cellSize)
+                    && !(this.loc.y + Settings.cellSize - 10 < otherCube.loc.y)) {
+                result = "LEFT";
             }
         } else {
-            if ((this.loc.y > otherCube.loc.y) && (this.vel.y < 0)) {
+            if ((this.loc.y >= otherCube.loc.y) && (this.vel.y < 0)) {
                 result = "UP";
             } else if (((this.loc.y <= otherCube.loc.y) && (this.vel.y > 0))) {
                 result = "DOWN";
@@ -87,7 +89,7 @@ public class DinamicCube extends Cube {
                         switch (typeColision(cube)) {
                             case "DOWN":
                                 vel.y = 0;
-                                loc.y = cube.loc.y - Settings.cellSize;
+                                loc.y = cube.loc.y - Settings.cellSize - 1;
                                 canJump = true;
                                 break;
                             case "RIGHT":

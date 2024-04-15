@@ -76,6 +76,9 @@ public class MainWindow extends JFrame implements Runnable {
         this.targetTime = 1000000000 / FPS;
         this.delta = 0;
         this.averageFPS = FPS;
+
+        // Creo el hilo
+        thread = new Thread(this);
     }
 
     @Override
@@ -141,11 +144,12 @@ public class MainWindow extends JFrame implements Runnable {
      */
     public void start() {
         funcionar = true;
-        thread = new Thread(this);
+        // thread = new Thread(this);
         State.setActualState(new GameState(null));
 
         state = State.getActualState();
-        thread.start();
+        thread.run();
+        // thread.start();
     }
 
     /**
