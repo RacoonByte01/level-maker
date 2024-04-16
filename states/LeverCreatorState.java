@@ -5,10 +5,12 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
+import inputs.Keyboard;
 import inputs.Mouse;
 import raccoon.PVector;
 import settings.Settings;
 import gameObjects.Cube;
+import gameObjects.Player;
 
 /**
  * class LeverCreatorState
@@ -30,8 +32,9 @@ public class LeverCreatorState extends State {
         } else {
             this.grid = new ArrayList<>();
             // Spawn del player
-            this.grid.add(new Cube(new PVector(0, 0), new Color(255, 255, 255)));
+            this.grid.add(new Player(new PVector(0, 0), new Color(255, 255, 255)));
         }
+        Keyboard.key = null;
     }
 
     @Override
@@ -57,6 +60,11 @@ public class LeverCreatorState extends State {
                     }
                 }
             }
+        }
+        /* Work in progress */
+        if (Keyboard.key != null && Keyboard.key == ' ') {
+            Keyboard.key = null;
+            State.setActualState(new GameState(grid));
         }
     }
 

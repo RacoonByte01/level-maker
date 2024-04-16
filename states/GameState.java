@@ -7,7 +7,6 @@ import java.util.List;
 
 import gameObjects.Cube;
 import gameObjects.Player;
-import raccoon.PVector;
 import settings.Settings;
 
 /**
@@ -34,64 +33,6 @@ public class GameState extends State {
                 } else {
                         GameState.grid = new ArrayList<>();
                 }
-                /* Work in progress */
-                GameState.grid.add(
-                                new Player(
-                                                new PVector(Settings.width / 2 / Settings.cellSize,
-                                                                Settings.height / 2 / Settings.cellSize - 1),
-                                                new Color(255, 255, 255)));
-                for (int i = 0; i < Settings.width / Settings.cellSize; i++) {
-                        GameState.grid.add(new Cube(new PVector(i, Settings.height / 2 / Settings.cellSize),
-                                        new Color(255, 0, 0)));
-                }
-                // for (int i = 0; i < Settings.width / Settings.cellSize; i++) {
-                // GameState.grid
-                // .add(new Cube(new PVector(i, Settings.height / 2 / Settings.cellSize - 3),
-                // new Color(255, 0, 0)));
-                // }
-                GameState.grid.add(new Cube(
-                                new PVector(Settings.width / 2 / Settings.cellSize + 5,
-                                                Settings.height / 2 / Settings.cellSize - 1),
-                                new Color(255, 0, 0)));
-                GameState.grid.add(new Cube(
-                                new PVector(Settings.width / 2 / Settings.cellSize + 5,
-                                                Settings.height / 2 / Settings.cellSize - 2),
-                                new Color(255, 0, 0)));
-                GameState.grid.add(new Cube(
-                                new PVector(Settings.width / 2 / Settings.cellSize + 5,
-                                                Settings.height / 2 / Settings.cellSize - 3),
-                                new Color(255, 0, 0)));
-                GameState.grid.add(new Cube(
-                                new PVector(Settings.width / 2 / Settings.cellSize + 5,
-                                                Settings.height / 2 / Settings.cellSize - 4),
-                                new Color(255, 0, 0)));
-
-                GameState.grid.add(new Cube(
-                                new PVector(Settings.width / 2 / Settings.cellSize - 5,
-                                                Settings.height / 2 / Settings.cellSize - 1),
-                                new Color(255, 0, 0)));
-                GameState.grid.add(new Cube(
-                                new PVector(Settings.width / 2 / Settings.cellSize - 5,
-                                                Settings.height / 2 / Settings.cellSize - 2),
-                                new Color(255, 0, 0)));
-                GameState.grid.add(new Cube(
-                                new PVector(Settings.width / 2 / Settings.cellSize - 5,
-                                                Settings.height / 2 / Settings.cellSize - 3),
-                                new Color(255, 0, 0)));
-                GameState.grid.add(new Cube(
-                                new PVector(Settings.width / 2 / Settings.cellSize - 5,
-                                                Settings.height / 2 / Settings.cellSize - 4),
-                                new Color(255, 0, 0)));
-
-                for (int x = 1; x < 10; x++) {
-                        for (int y = 1; y < x; y++) {
-                                GameState.grid.add(new Cube(
-                                                new PVector(x + Settings.width / 2 / Settings.cellSize,
-                                                                Settings.height / 2 / Settings.cellSize - y),
-                                                new Color(255, 0, 0)));
-                        }
-                }
-
         }
 
         @Override
