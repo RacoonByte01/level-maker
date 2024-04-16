@@ -32,7 +32,7 @@ public class Player extends DinamicCube {
         if (Keyboard.right) {
             vel.x = 15;
         }
-        if (Keyboard.jump && canJump) {
+        if (Keyboard.jump && canJump && !(vel.y > 0)) {
             vel.y = -31;
             canJump = false;
         }
