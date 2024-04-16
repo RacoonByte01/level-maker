@@ -22,19 +22,21 @@ public class LeverCreatorState extends State {
     private PVector loc, lastClick, locCam;
     private boolean isPressed;
     public List<Cube> grid;
+    public int angel;
 
     public LeverCreatorState(List<Cube> grid) {
-        this.loc = new PVector(0, 0);
+        this.loc = new PVector(Settings.width / 2, Settings.height / 2 - Settings.cellSize * 2);
         this.locCam = new PVector(0, 0);
         this.isPressed = false;
         if (grid != null) {
             this.grid = grid;
         } else {
             this.grid = new ArrayList<>();
-            // Spawn del player
+            // Spawn of player
             this.grid.add(new Player(new PVector(0, 0), new Color(255, 255, 255)));
         }
         Keyboard.key = null;
+        this.angel = 0;
     }
 
     @Override
@@ -51,7 +53,8 @@ public class LeverCreatorState extends State {
                     }
                 }
                 if (!wasLoc) {
-                    grid.add(new Cube(press, new Color(255, 0, 0)));
+                    // grid.add(new Cube(press, new Color(255, 0, 0)));
+                    grid.add(new Cube(press, "assets/a.png", angel));
                 }
             } else if (Mouse.right && !(press.x == 0 && press.y == 0)) {
                 for (int i = 0; i < grid.size(); i++) {
@@ -65,6 +68,9 @@ public class LeverCreatorState extends State {
         if (Keyboard.key != null && Keyboard.key == ' ') {
             Keyboard.key = null;
             State.setActualState(new GameState(grid));
+        } else if (Keyboard.key != null && Character.toLowerCase(Keyboard.key) == 'r') {
+            Keyboard.key = null;
+            angel = (angel + 1) % 4;
         }
     }
 

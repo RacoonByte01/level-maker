@@ -9,7 +9,10 @@ import windows.MainWindow;
  * @version 1.0
  */
 public class Main {
+    public static MainWindow mainWindow;
+
     public static void main(String[] args) {
-        new MainWindow().start();
+        mainWindow = new MainWindow();
+        mainWindow.start();
     }
 }
