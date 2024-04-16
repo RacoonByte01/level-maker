@@ -46,7 +46,7 @@ public class GameState extends State {
 
         @Override
         public void draw(Graphics g) {
-                g.setColor(new Color(0));
+                g.setColor(new Color(51, 51, 65));
                 g.fillRect(0, 0, Settings.width, Settings.height);
                 Player player = (Player) grid.get(0);
                 g.translate((int) -player.getLoc().x + Settings.width / 2,

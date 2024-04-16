@@ -31,16 +31,17 @@ public class Cube extends GameObjet {
 
     public Cube(PVector loc, String asset, int angle) {
         super(new PVector(loc.x * Settings.cellSize, loc.y * Settings.cellSize));
+        File image = new File(asset);
         // super(loc);
         try {
-            if (asset != null) {
+            if (asset != null && image.isFile()) {
                 this.asset = ImageIO.read(new File(asset));
             } else {
-                this.asset = ImageIO.read(new File("assets/a.png"));
+                this.asset = ImageIO.read(new File("assets/error/miss-assets.png"));
             }
         } catch (Exception ex) {
             System.out.println("error - load image");
-            // handle exception...
+            this.col = new Color(255, 255, 255);
         }
         this.angle = angle;
     }

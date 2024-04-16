@@ -54,7 +54,7 @@ public class LeverCreatorState extends State {
                 }
                 if (!wasLoc) {
                     // grid.add(new Cube(press, new Color(255, 0, 0)));
-                    grid.add(new Cube(press, "assets/a.png", angel));
+                    grid.add(new Cube(press, "assets/grass/grass-corner.png", angel));
                 }
             } else if (Mouse.right && !(press.x == 0 && press.y == 0)) {
                 for (int i = 0; i < grid.size(); i++) {
@@ -76,7 +76,7 @@ public class LeverCreatorState extends State {
 
     @Override
     public void draw(Graphics g) {
-        g.setColor(new Color(0));
+        g.setColor(new Color(51, 51, 65));
         g.fillRect(0, 0, Settings.width, Settings.height);
         g.translate((int) locCam.x, (int) locCam.y);
         for (Cube cube : grid) {
