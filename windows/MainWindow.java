@@ -42,12 +42,12 @@ public class MainWindow extends JFrame implements Runnable {
      */
     public MainWindow() {
         // Ventana al iniciar
-        this.setTitle("Titulo de la ventana");
+        this.setVisible(true);
+        this.setTitle("Level Maker");
         this.setSize(Settings.width, Settings.height);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        this.setVisible(true);
 
         if (Settings.fullScreen) {
             this.setExtendedState(Frame.MAXIMIZED_BOTH);
@@ -89,6 +89,7 @@ public class MainWindow extends JFrame implements Runnable {
         long time = 0;
 
         do {
+
             now = System.nanoTime();
             delta += (now - lastTime) / targetTime;
             time = now - lastTime;
@@ -144,7 +145,6 @@ public class MainWindow extends JFrame implements Runnable {
      */
     public void start() {
         funcionar = true;
-        // thread = new Thread(this);
         // State Game
         // State.setActualState(new GameState(null));
         // Create Level
@@ -152,7 +152,6 @@ public class MainWindow extends JFrame implements Runnable {
 
         state = State.getActualState();
         thread.run();
-        // thread.start();
     }
 
     /**
