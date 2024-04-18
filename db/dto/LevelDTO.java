@@ -3,7 +3,7 @@ package db.dto;
 public class LevelDTO {
     // Basic Infromation
     Integer id;
-    String nombre, data, correo;
+    String nombre, data, correo, fechaCreacion;
 
     // More information
 
@@ -21,15 +21,54 @@ public class LevelDTO {
     }
 
     /**
-     * For Updates or Delete LevelDTO for Database
      * 
      * @param id
      * @param nombre
      * @param data
+     * @param fechaCreacion
      */
-    public LevelDTO(Integer id, String nombre, String data) {
+    public LevelDTO(Integer id, String nombre, String data, String fechaCreacion) {
         this.id = id;
         this.nombre = nombre;
         this.data = data;
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    /**
+     * 
+     * @param id
+     * @param nombre
+     * @param fechaCreacion
+     */
+    public LevelDTO(Integer id, String nombre, String fechaCreacion) {
+        this.id = id;
+        this.nombre = nombre;
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public String getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    @Override
+    public String toString() {
+        return "LevelDTO [id=" + id + ", nombre=" + nombre + ", data=" + data + ", correo=" + correo
+                + ", fechaCreacion=" + fechaCreacion + "]";
     }
 }

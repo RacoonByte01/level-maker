@@ -46,4 +46,25 @@ public class UserDTO {
     public void setPass(String pass) {
         this.pass = DTOUtils.getMD5(pass);
     }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDTO [correo=" + correo + ", pass=" + pass + ", nombre=" + nombre + ", telefono=" + telefono + "]";
+    }
 }
