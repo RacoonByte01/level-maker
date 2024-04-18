@@ -26,31 +26,31 @@ Este motor usara una base de datos para guardar los niveles de los creadores, pa
 
 ### 2.1 Requisitos Funcionales
 
-| ID  | Requisito | Priorodad |
-| --- | --------- | --------- |
-| F01 | El usuario se registrara con correo, contraseña y nombre de usuario de forma obligatoria. | ALTA |
-| F02 | Crear el motor sobre el estará montada toda la GUI del programa. | ALTA |
-| F03 | Crear la base de datos que usara el programa para trabajar. | ALTA |
-| F04 | Crear cada uno de los modos | ALTA |
-| F05 | Añadir texturas variadas al motor para que los usuario puedan tener una gran variedad de bloques para decorar sus niveles | BAJA |
-| F06 | Añadir una GUI agradable al usuario y fácilmente entendible | MEDIA |
-| F07 | Añadir la implementación de MODs (modificaciones externas) | BAJA |
-| F08 | El usuario pude meter su propios assets | BAJA |
-| F09 | El usuario pueda dar de baja su cuenta | BAJA |
-| F10 | Compartir mundos entre usuario | BAJA |
-| F11 | Hacer una buena documentación | ALTA |
+| ID  | Requisito                                                                                                                 | Priorodad |
+| --- | ------------------------------------------------------------------------------------------------------------------------- | --------- |
+| F01 | El usuario se registrara con correo, contraseña y nombre de usuario de forma obligatoria.                                 | ALTA      |
+| F02 | Crear el motor sobre el estará montada toda la GUI del programa.                                                          | ALTA      |
+| F03 | Crear la **base** de datos que usara el programa para trabajar.                                                           | ALTA      |
+| F04 | Crear cada uno de los modos                                                                                               | ALTA      |
+| F05 | Añadir texturas variadas al motor para que los usuario puedan tener una gran variedad de bloques para decorar sus niveles | BAJA      |
+| F06 | Añadir una GUI agradable al usuario y fácilmente entendible                                                               | MEDIA     |
+| F07 | Añadir la implementación de MODs (modificaciones externas)                                                                | BAJA      |
+| F08 | El usuario pude meter su propios assets                                                                                   | BAJA      |
+| F09 | El usuario pueda dar de baja su cuenta                                                                                    | BAJA      |
+| F10 | Compartir mundos entre usuario                                                                                            | BAJA      |
+| F11 | Hacer una buena documentación                                                                                             | ALTA      |
 
 ### 2.2 Requisitos No Funcionales
 
-| ID  | Requisito | Solución |
-| --- | --------- | -------- |
-| N01 | Segurida | Para brindar seguridad a los usuarios se guardaran las contraseñas cifradas al igual que el contenido que el usuario este guardando en la base de datos para que cualquier intento de robo de datos sea en vano |
-| N02 | Rendimiento | Que el programa este bien optimizado. |
-| N03 | Estabilidad | Para esto se verán todas las posibles excepciones para poder dar una mejor experiencia de usuario. |
-| N04 | Personalización | Con esto se permitirá que la instancia de los usuarios se más agradable. | 
-| N05 | Buen Manejo de Excepciones | Esto para que los usuarios no se confundan y/o malinterpreten errores de funcionamiento del programa.
-| N06 | Portabilidad | Ya que el lenguaje de programación es JAVA este tiene la capacidad de poder ser ejecutado en muchos sistemas operativos. |
-| N07 | Reusabilidad | Ya que es una herramienta de carácter creativo esta es muy versátil y al no tener un fin establecido, hace que se reutilice en el tiempo. |
+| ID  | Requisito                  | Solución                                                                                                                                                                                                        |
+| --- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| N01 | Segurida                   | Para brindar seguridad a los usuarios se guardaran las contraseñas cifradas al igual que el contenido que el usuario este guardando en la base de datos para que cualquier intento de robo de datos sea en vano |
+| N02 | Rendimiento                | Que el programa este bien optimizado.                                                                                                                                                                           |
+| N03 | Estabilidad                | Para esto se verán todas las posibles excepciones para poder dar una mejor experiencia de usuario.                                                                                                              |
+| N04 | Personalización            | Con esto se permitirá que la instancia de los usuarios se más agradable.                                                                                                                                        |
+| N05 | Buen Manejo de Excepciones | Esto para que los usuarios no se confundan y/o malinterpreten errores de funcionamiento del programa.                                                                                                           |
+| N06 | Portabilidad               | Ya que el lenguaje de programación es JAVA este tiene la capacidad de poder ser ejecutado en muchos sistemas operativos.                                                                                        |
+| N07 | Reusabilidad               | Ya que es una herramienta de carácter creativo esta es muy versátil y al no tener un fin establecido, hace que se reutilice en el tiempo.                                                                       |
 
 ## 3. Diseño de la aplicación
 
@@ -60,14 +60,14 @@ Este diagrama hace una representación de todas las funcionalidades que puede re
 
 ![](https://raw.githubusercontent.com/javiLeL/Lever-Maker/main/doc/imgs/Diagrama%20de%20uso.png?token=GHSAT0AAAAAACQMXCNAR73J3WATOJIA4PPYZRAJOGQ)
 
-| Id | Nombre | Prioridad |
-| -- | ------ | --------- |
-| CU01 | Registrar | MEDIO |
-| CU02 | Iniciar sesión | MEDIO |
-| CU03 | Crear nivel | ALTA |
-| CU04 | Editar nivel | ALTA |
-| CU05 | Borrar nivel | BAJA |
-| CU06 | Jugar nivel | ALTA |
+| Id   | Nombre         | Prioridad |
+| ---- | -------------- | --------- |
+| CU01 | Registrar      | MEDIO     |
+| CU02 | Iniciar sesión | MEDIO     |
+| CU03 | Crear nivel    | ALTA      |
+| CU04 | Editar nivel   | ALTA      |
+| CU05 | Borrar nivel   | BAJA      |
+| CU06 | Jugar nivel    | ALTA      |
 
 ### 3.2 Diagrama Entidad-Relación
 
