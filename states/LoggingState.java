@@ -10,6 +10,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
+import db.crud.UserCRUD;
+import db.dto.DTOUtils;
+import db.dto.UserDTO;
 import settings.Settings;
 
 /**
@@ -32,9 +35,15 @@ public class LoggingState extends State {
         button = new Button(Settings.width / 2, Settings.height * 5 / 6, "Enviar", new Acttion() {
             @Override
             public void accionARealizar() {
-                // textBoxs[1].togglePassword();
-                // System.out.println("Se enviaran los datos :D");
-                State.setActualState(new CameraState());
+                // new UserCRUD().insert(new UserDTO("javier212002@gmail.com", "1234"));
+                UserDTO user = (UserDTO) new UserCRUD().select(textBoxs[0].getText());
+                if (user != null && user.getPass().equals(DTOUtils.getMD5(textBoxs[1].getText()))) {
+                    // TODO code read and represent all levels
+                    System.out.println("BIEN");
+                } else {
+                    // TODO Code error
+                    System.out.println("MAL");
+                }
             }
         });
     }

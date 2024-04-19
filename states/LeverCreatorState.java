@@ -116,8 +116,6 @@ public class LeverCreatorState extends State {
         for (Cube cube : grid) {
             cube.draw(g);
         }
-        // g.setColor(new Color(255, 255, 255));
-        // g.fillRect(0, 0, 32, 32);
     }
 
     protected void camera() {

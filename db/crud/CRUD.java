@@ -15,7 +15,8 @@ public abstract class CRUD {
 
     public CRUD() {
         try {
-            this.connection = DriverManager.getConnection("jdbc:mysql://" + IP_DB + ":" + PORT_DB + "/" + NAME_DB,
+            this.connection = DriverManager.getConnection(
+                    "jdbc:mysql://" + IP_DB + ":" + PORT_DB + "/" + NAME_DB,
                     USER_DB,
                     PASS_DB);
         } catch (SQLException e) {

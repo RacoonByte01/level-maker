@@ -26,7 +26,7 @@ public class UserCRUD extends CRUD {
             // Set basic information
             PreparedStatement preparedStatement = connection.prepareStatement(sentence);
             preparedStatement.setString(1, user.getCorreo());
-            preparedStatement.setString(2, user.getPass());
+            preparedStatement.setString(2, DTOUtils.getMD5(user.getPass()));
             preparedStatement.executeUpdate();
 
             // Set the complex information
@@ -87,7 +87,7 @@ public class UserCRUD extends CRUD {
         try {
             // Set basic information
             PreparedStatement preparedStatement = connection.prepareStatement(sentence);
-            preparedStatement.setString(1, user.getPass());
+            preparedStatement.setString(1, DTOUtils.getMD5(user.getPass()));
             preparedStatement.setString(2, user.getCorreo());
             preparedStatement.executeUpdate();
 

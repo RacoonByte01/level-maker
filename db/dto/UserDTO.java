@@ -20,7 +20,7 @@ public class UserDTO {
      */
     public UserDTO(String correo, String pass) {
         this.correo = correo;
-        setPass(pass);
+        this.pass = pass;
     }
 
     /**
@@ -33,7 +33,7 @@ public class UserDTO {
      */
     public UserDTO(String correo, String pass, String nombre, String telefono) {
         this.correo = correo;
-        setPass(pass);
+        this.pass = pass;
         this.nombre = nombre;
         this.telefono = telefono;
     }

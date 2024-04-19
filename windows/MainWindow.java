@@ -149,8 +149,10 @@ public class MainWindow extends JFrame implements Runnable {
         // State Game
         // State.setActualState(new GameState(null));
         // Create Level
-        State.setActualState(new LeverCreatorState(new LevelDTO("Prueba :D", null, "javier212002@gmail.com")));
-
+        // State.setActualState(new LeverCreatorState(new LevelDTO(5, "Prueba :D", null,
+        // "javier212002@gmail.com")));
+        // Logging
+        State.setActualState(new LoggingState());
         state = State.getActualState();
         thread.run();
     }
