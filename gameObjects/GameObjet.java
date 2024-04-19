@@ -1,6 +1,7 @@
 package gameObjects;
 
 import java.awt.Graphics;
+import java.io.Serializable;
 
 import raccoon.PVector;
 
@@ -12,7 +13,7 @@ import raccoon.PVector;
  * @author Javi.LeL
  * @version 1.0
  */
-public abstract class GameObjet {
+public abstract class GameObjet implements Serializable {
     /* This is the position of the objet will be start */
     protected PVector loc;
 

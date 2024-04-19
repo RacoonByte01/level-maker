@@ -9,6 +9,7 @@ import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
 
+import db.dto.LevelDTO;
 import inputs.Keyboard;
 import inputs.Mouse;
 import settings.Settings;
@@ -148,7 +149,7 @@ public class MainWindow extends JFrame implements Runnable {
         // State Game
         // State.setActualState(new GameState(null));
         // Create Level
-        State.setActualState(new LeverCreatorState(null));
+        State.setActualState(new LeverCreatorState(new LevelDTO("Prueba :D", null, "javier212002@gmail.com")));
 
         state = State.getActualState();
         thread.run();

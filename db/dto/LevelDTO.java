@@ -50,8 +50,16 @@ public class LevelDTO {
         return id;
     }
 
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     public String getNombre() {
         return nombre;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 
     public String getData() {

@@ -19,7 +19,7 @@ public class UserCRUD extends CRUD {
     }
 
     @Override
-    public void insert(Object objUserDTO) {
+    public boolean insert(Object objUserDTO) {
         UserDTO user = (UserDTO) objUserDTO;
         String sentence = "INSERT INTO USUARIOS (CORREO, PASS) VALUES (?, ?);";
         try {
@@ -37,8 +37,10 @@ public class UserCRUD extends CRUD {
             preparedStatement.setString(3, user.getTelefono());
             preparedStatement.setString(4, DTOUtils.getActualDay());
             preparedStatement.executeUpdate();
+            return true;
         } catch (SQLException e) {
-            System.out.println("Error to insert: " + e);
+            // System.out.println("Error to insert: " + e);
+            return false;
         }
     }
 
@@ -79,7 +81,7 @@ public class UserCRUD extends CRUD {
     }
 
     @Override
-    public void update(Object newObjUserDTO) {
+    public boolean update(Object newObjUserDTO) {
         UserDTO user = (UserDTO) newObjUserDTO;
         String sentence = "UPDATE USUARIOS SET PASS = ? WHERE CORREO = ?;";
         try {
@@ -96,21 +98,25 @@ public class UserCRUD extends CRUD {
             preparedStatement.setString(2, user.getTelefono());
             preparedStatement.setString(3, user.getCorreo());
             preparedStatement.executeUpdate();
+            return true;
         } catch (SQLException e) {
-            System.out.println("Error to update:\n " + e);
+            // System.out.println("Error to update:\n " + e);
+            return false;
         }
     }
 
     @Override
-    public void delete(Object emailStr) {
+    public boolean delete(Object emailStr) {
         String email = (String) emailStr;
         String sentence = "DELETE FROM USUARIOS WHERE CORREO = ?;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sentence);
             preparedStatement.setString(1, email);
             preparedStatement.executeUpdate();
+            return true;
         } catch (SQLException e) {
-            System.out.println("Error to delete:\n " + e);
+            // System.out.println("Error to delete:\n " + e);
+            return false;
         }
     }
 }

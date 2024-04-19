@@ -20,7 +20,7 @@ public class DTOUtils {
      * @return
      * @throws IOException
      */
-    public static String toString(Serializable o) throws IOException {
+    public static String objToString(Serializable o) throws IOException {
         // If we dont use ByteArrayOutputStream we must to use BLOB in the db
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(baos);
@@ -37,7 +37,7 @@ public class DTOUtils {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public static Object fromString(String s) throws IOException, ClassNotFoundException {
+    public static Object stringToObj(String s) throws IOException, ClassNotFoundException {
         byte[] data = Base64.getDecoder().decode(s);
         ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(data));
         Object o = ois.readObject();

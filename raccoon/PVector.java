@@ -1,12 +1,14 @@
 package raccoon;
 
+import java.io.Serializable;
+
 /**
  * This class make more easy work with vectors
  * 
  * @author JaviLeL
- * @version 1.5
+ * @version 1.6
  */
-public class PVector {
+public class PVector implements Serializable {
     public float x, y, z;
 
     /**

@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
@@ -14,7 +15,9 @@ import settings.Settings;
 
 public class Cube extends GameObjet {
     public Color col;
-    private BufferedImage asset;
+
+    // private BufferedImage asset;
+    private String asset;
     protected AffineTransform at;
     protected int angle;
 
@@ -33,16 +36,12 @@ public class Cube extends GameObjet {
         super(new PVector(loc.x * Settings.cellSize, loc.y * Settings.cellSize));
         File image = new File(asset);
         // super(loc);
-        try {
-            if (asset != null && image.isFile()) {
-                this.asset = ImageIO.read(new File(asset));
-            } else {
-                this.asset = ImageIO.read(new File("assets/error/miss-assets.png"));
-            }
-        } catch (Exception ex) {
-            System.out.println("error - load image");
-            this.col = new Color(255, 255, 255);
+        if (asset != null && image.isFile()) {
+            this.asset = asset;
+        } else {
+            this.asset = "assets/error/miss-assets.png";
         }
+
         this.angle = angle;
     }
 
@@ -55,9 +54,18 @@ public class Cube extends GameObjet {
             g.drawRect((int) loc.x, (int) loc.y, Settings.cellSize, Settings.cellSize);
         } else if (asset != null) {
             Graphics2D g2d = (Graphics2D) g;
+            BufferedImage img;
+            try {
+                img = ImageIO.read(new File(asset));
+            } catch (IOException e) {
+                System.out.println("Error to load img:\n" + e);
+                img = null;
+                System.out.println("Erro to load img:\n" + e);
+                this.col = new Color(255, 255, 255);
+            }
             at = AffineTransform.getTranslateInstance(loc.x, loc.y);
             at.rotate((Math.PI * angle / 2), Settings.cellSize / 2, Settings.cellSize / 2);
-            g2d.drawImage(asset, at, null);
+            g2d.drawImage(img, at, null);
             // g.drawImage(asset, (int) loc.x, (int) loc.y, Main.mainWindow);
         }
     }

@@ -15,7 +15,8 @@ public class LevelCRUD extends CRUD {
     }
 
     @Override
-    public void insert(Object objUserDTO) {
+    public boolean insert(Object objUserDTO) {
+
         LevelDTO level = (LevelDTO) objUserDTO;
         String sentence = "INSERT INTO NIVEL (NOMBRE, FECHA_CREACION, DATALEVEL, CORREO) VALUES (?, ?, ?, ?);";
         try {
@@ -25,8 +26,10 @@ public class LevelCRUD extends CRUD {
             preparedStatement.setString(3, level.getData());
             preparedStatement.setString(4, level.getCorreo());
             preparedStatement.executeUpdate();
+            return true;
         } catch (SQLException e) {
-            System.out.println("Error to insert: " + e);
+            // System.out.println("Error to insert: " + e);
+            return false;
         }
     }
 
@@ -72,7 +75,7 @@ public class LevelCRUD extends CRUD {
     }
 
     @Override
-    public void update(Object newObjLevelDTO) {
+    public boolean update(Object newObjLevelDTO) {
         LevelDTO level = (LevelDTO) newObjLevelDTO;
         String sentence = "UPDATE NIVEL SET NOMBRE = ?, DATALEVEL = ? WHERE ID = ?;";
         try {
@@ -82,21 +85,25 @@ public class LevelCRUD extends CRUD {
             preparedStatement.setString(2, level.getData());
             preparedStatement.setInt(3, level.getId());
             preparedStatement.executeUpdate();
+            return true;
         } catch (SQLException e) {
-            System.out.println("Error update:\n" + e);
+            // System.out.println("Error update:\n" + e);
+            return false;
         }
     }
 
     @Override
-    public void delete(Object idInteger) {
+    public boolean delete(Object idInteger) {
         Integer id = (Integer) idInteger;
         String sentence = "DELETE FROM NIVEL WHERE ID = ?;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sentence);
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
+            return true;
         } catch (SQLException e) {
-            System.out.println("Error to delete:\n " + e);
+            // System.out.println("Error to delete:\n " + e);
+            return false;
         }
     }
 }

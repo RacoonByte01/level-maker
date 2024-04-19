@@ -23,7 +23,7 @@ public abstract class CRUD {
         }
     }
 
-    abstract public void insert(Object o);
+    abstract public boolean insert(Object o);
 
     public Object select(Object o) {
         return select(o, false);
@@ -31,7 +31,7 @@ public abstract class CRUD {
 
     abstract public Object select(Object o, boolean more);
 
-    abstract public void update(Object o);
+    abstract public boolean update(Object o);
 
-    abstract public void delete(Object o);
+    abstract public boolean delete(Object o);
 }

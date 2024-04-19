@@ -2,9 +2,13 @@ package states;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import db.crud.LevelCRUD;
+import db.dto.DTOUtils;
+import db.dto.LevelDTO;
 import inputs.Keyboard;
 import inputs.Mouse;
 import raccoon.PVector;
@@ -20,16 +24,25 @@ import gameObjects.Player;
  */
 public class LeverCreatorState extends State {
     private PVector loc, lastClick, locCam;
+    public LevelDTO level;
     private boolean isPressed;
     public List<Cube> grid;
+
     public int angel;
 
-    public LeverCreatorState(List<Cube> grid) {
+    @SuppressWarnings("unchecked")
+    public LeverCreatorState(LevelDTO level) {
         this.loc = new PVector(Settings.width / 2, Settings.height / 2 - Settings.cellSize * 2);
         this.locCam = new PVector(0, 0);
         this.isPressed = false;
-        if (grid != null) {
-            this.grid = grid;
+
+        this.level = level;
+        if (level.getData() != null) {
+            try {
+                this.grid = (List<Cube>) DTOUtils.stringToObj(level.getData());
+            } catch (ClassNotFoundException | IOException e) {
+                System.out.println("Error al cargar la info:\n" + e);
+            }
         } else {
             this.grid = new ArrayList<>();
             // Spawn of player
@@ -71,6 +84,27 @@ public class LeverCreatorState extends State {
         } else if (Keyboard.key != null && Character.toLowerCase(Keyboard.key) == 'r') {
             Keyboard.key = null;
             angel = (angel + 1) % 4;
+        } else if (Keyboard.key != null && Character.toLowerCase(Keyboard.key) == 's') {
+            Keyboard.key = null;
+            saveData();
+        }
+    }
+
+    private void saveData() {
+        if (level.getId() == null) {
+            try {
+                level.setData(DTOUtils.objToString((ArrayList<Cube>) grid));
+            } catch (IOException e) {
+                System.out.println("Error to save (insert):\n" + e);
+            }
+            new LevelCRUD().insert(level);
+        } else {
+            try {
+                level.setData(DTOUtils.objToString((ArrayList<Cube>) grid));
+            } catch (IOException e) {
+                System.out.println("Error to save (update):\n" + e);
+            }
+            new LevelCRUD().update(level);
         }
     }
 
