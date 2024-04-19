@@ -9,7 +9,6 @@ import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
 
-import db.dto.LevelDTO;
 import inputs.Keyboard;
 import inputs.Mouse;
 import settings.Settings;
