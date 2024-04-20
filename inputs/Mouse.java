@@ -3,6 +3,8 @@ package inputs;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import ui.Button;
+
 /**
  * Class how can get alot infomation of the mouse
  * 
@@ -84,6 +86,7 @@ public class Mouse extends MouseAdapter {
             // Set the right false
             right = false;
         }
+        Button.restart = true;
     }
 
     /**

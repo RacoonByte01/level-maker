@@ -2,6 +2,7 @@ package ui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 
 import inputs.Keyboard;
@@ -34,17 +35,7 @@ public class TextBox {
      * @param size       set the size of the text
      */
     public TextBox(float x, float y, float tamX, float tamY, String textInicio, int size) {
-        this.loc = new PVector(x, y);
-        this.tam = new PVector(tamX, tamY);
-        this.textInicio = textInicio;
-        this.text = "";
-        this.size = size;
-        // Set some parameters by default
-        this.colText = new Color(255, 255, 255);
-        this.colNotSelect = new Color(51, 51, 51);
-        this.colSelect = new Color(100, 100, 100);
-        this.colBox = colNotSelect;
-        this.isSelected = false;
+        this(x, y, tamX, tamY, textInicio, size, false);
     }
 
     /**
@@ -81,17 +72,22 @@ public class TextBox {
     public void draw(Graphics g) {
         g.setColor(colBox);
         g.fillRect((int) (loc.x - tam.x / 2), (int) (loc.y - tam.y / 2), (int) tam.x, (int) tam.y);
+        FontMetrics fontMetrics = g.getFontMetrics();
         if (text.length() == 0) {
             g.setColor(new Color(155, 155, 155));
-            Text.drawText(g, textInicio, loc.x, loc.y - 5, true, new Font("Dialog", Font.PLAIN, size));
+            Text.drawText(g, textInicio, loc.x - tam.x / 2 + 10, loc.y + fontMetrics.getHeight() / 3, false,
+                    new Font("Dialog", Font.PLAIN, size));
         } else {
             g.setColor(colText);
             if (!isPassword) {
-                Text.drawText(g, text, loc.x, loc.y - 5, true, new Font("Dialog", Font.PLAIN, size));
+                Text.drawText(g, text, loc.x - tam.x / 2 + 10, loc.y + fontMetrics.getHeight() / 3, false,
+                        new Font("Dialog", Font.PLAIN, size));
             } else {
-                Text.drawText(g, genAsterisc(text.length()), loc.x, loc.y, true,
+                Text.drawText(g, genAsterisc(text.length()), loc.x - tam.x / 2 + 10,
+                        loc.y + fontMetrics.getHeight() / 3 + 8, false,
                         new Font("Dialog", Font.PLAIN, (int) (size * 1.5)));
             }
+            Text.drawText(g, "", 0, 0, false, new Font("Dialog", Font.PLAIN, (int) (size)));
         }
     }
 
@@ -116,7 +112,6 @@ public class TextBox {
                     // System.out.println((int) Keyboard.key);
                     text += Keyboard.key;
                 }
-
                 Keyboard.key = null;
             }
         } else {
@@ -142,6 +137,15 @@ public class TextBox {
      */
     public String getText() {
         return text;
+    }
+
+    /**
+     * This function return the text wrote by the user
+     * 
+     * @return text
+     */
+    public void setText(String text) {
+        this.text = text;
     }
 
     /**

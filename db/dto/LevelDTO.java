@@ -77,6 +77,6 @@ public class LevelDTO {
     @Override
     public String toString() {
         return "LevelDTO [id=" + id + ", nombre=" + nombre + ", data=" + data + ", correo=" + correo
-                + ", fechaCreacion=" + fechaCreacion + "]";
+                + ", fechaCreacion=" + fechaCreacion + "]\n";
     }
 }

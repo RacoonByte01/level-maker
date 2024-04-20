@@ -15,6 +15,7 @@ import settings.Constants;
  * @version 1.1
  */
 public class Button {
+    public static boolean restart = true;
     private boolean buttonPressed;
     private String text;
     PVector loc;
@@ -72,8 +73,9 @@ public class Button {
             col = new Color(51, 51, 51);
         }
 
-        if (buttonPressed) {
+        if (buttonPressed && restart) {
             acttion.accionARealizar();
+            Button.restart = false;
         }
     }
 }
