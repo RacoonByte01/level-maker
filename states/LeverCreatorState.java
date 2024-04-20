@@ -67,7 +67,7 @@ public class LeverCreatorState extends State {
                 }
                 if (!wasLoc) {
                     // grid.add(new Cube(press, new Color(255, 0, 0)));
-                    grid.add(new Cube(press, "assets/grass/grass-corner.png", angel));
+                    grid.add(new Cube(press, "assets/grass/grass-all.png", angel));
                 }
             } else if (Mouse.right && !(press.x == 0 && press.y == 0)) {
                 for (int i = 0; i < grid.size(); i++) {
@@ -84,9 +84,11 @@ public class LeverCreatorState extends State {
         } else if (Keyboard.key != null && Character.toLowerCase(Keyboard.key) == 'r') {
             Keyboard.key = null;
             angel = (angel + 1) % 4;
-        } else if (Keyboard.key != null && Character.toLowerCase(Keyboard.key) == 's') {
-            Keyboard.key = null;
+        } else if (Keyboard.key != null && Keyboard.key == 27) {
             saveData();
+            @SuppressWarnings("unchecked")
+            List<LevelDTO> levels = (List<LevelDTO>) new LevelCRUD().select(SelectLevel.user.getCorreo());
+            State.setActualState(new SelectLevel(levels, SelectLevel.user));
         }
     }
 

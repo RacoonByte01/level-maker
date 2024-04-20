@@ -6,10 +6,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import db.crud.LevelCRUD;
 import db.dto.DTOUtils;
 import db.dto.LevelDTO;
 import gameObjects.Cube;
 import gameObjects.Player;
+import inputs.Keyboard;
 import raccoon.PVector;
 import settings.Settings;
 
@@ -41,6 +43,7 @@ public class GameState extends State {
 
         @SuppressWarnings("unchecked")
         public GameState(LevelDTO level) {
+                Keyboard.key = '´';
                 /*
                  * When you create a level you dont have information so for this not crash
                  * we put the information necesary to it work
@@ -64,6 +67,11 @@ public class GameState extends State {
                 player.controls();
                 for (Cube cube : grid) {
                         cube.update();
+                }
+                if (Keyboard.key != null && Keyboard.key == 27) {
+                        @SuppressWarnings("unchecked")
+                        List<LevelDTO> levels = (List<LevelDTO>) new LevelCRUD().select(SelectLevel.user.getCorreo());
+                        State.setActualState(new SelectLevel(levels, SelectLevel.user));
                 }
         }
 

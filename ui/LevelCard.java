@@ -41,7 +41,6 @@ public class LevelCard {
         if (isSelected) {
             idSelected = level.getId();
         } else {
-            idSelected = null;
             colBox = colNotSelect;
         }
         if (Mouse.x >= loc.x - tam.x / 2 && Mouse.x <= loc.x + tam.x / 2 &&
@@ -54,18 +53,24 @@ public class LevelCard {
         } else if (!(Mouse.x >= loc.x - tam.x / 2 && Mouse.x <= loc.x + tam.x / 2 &&
                 Mouse.y >= loc.y - tam.y / 2 && Mouse.y <= loc.y + tam.y / 2) && Mouse.left) {
             isSelected = false;
+            idSelected = null;
         }
     }
 
     public void draw(Graphics g) {
         g.setColor(colBox);
         g.fillRect((int) (loc.x - tam.x / 2), (int) (loc.y - tam.y / 2), (int) tam.x, (int) tam.y);
-        FontMetrics fontMetrics = g.getFontMetrics();
 
+        FontMetrics fontMetrics = g.getFontMetrics();
         g.setColor(colText);
-        Text.drawText(g, "", 0, 0, false, new Font("Dialog", Font.PLAIN, 25));
         Text.drawText(g, level.getNombre(), loc.x - tam.x / 2 + 10, loc.y + fontMetrics.getHeight() / 3, false,
                 new Font("Dialog", Font.PLAIN, 25));
+
+        fontMetrics = g.getFontMetrics();
+        Text.drawText(g, level.getFechaCreacion(),
+                loc.x + tam.x / 2 - fontMetrics.stringWidth(level.getFechaCreacion()) + 20,
+                loc.y + fontMetrics.getHeight() * 2 / 3, false,
+                new Font("Dialog", Font.PLAIN, 14));
     }
 
     public static Integer getIdSelected() {

@@ -74,6 +74,7 @@ public class Button {
         }
 
         if (buttonPressed && restart) {
+            Mouse.mousePressed = false;
             acttion.accionARealizar();
             Button.restart = false;
         }
