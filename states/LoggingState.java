@@ -39,7 +39,6 @@ public class LoggingState extends State {
             @Override
             public void accionARealizar() {
                 UserDTO user = (UserDTO) new UserCRUD().select(textBoxs[0].getText());
-                System.out.println(DTOUtils.getMD5(textBoxs[1].getText()));
                 if (user != null && user.getPass().equals(DTOUtils.getMD5(textBoxs[1].getText()))) {
                     // TODO code read and represent all levels
                     @SuppressWarnings("unchecked")

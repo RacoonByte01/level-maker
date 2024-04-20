@@ -2,11 +2,15 @@ package states;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import db.dto.DTOUtils;
+import db.dto.LevelDTO;
 import gameObjects.Cube;
 import gameObjects.Player;
+import raccoon.PVector;
 import settings.Settings;
 
 /**
@@ -32,6 +36,25 @@ public class GameState extends State {
                         GameState.grid = grid;
                 } else {
                         GameState.grid = new ArrayList<>();
+                }
+        }
+
+        @SuppressWarnings("unchecked")
+        public GameState(LevelDTO level) {
+                /*
+                 * When you create a level you dont have information so for this not crash
+                 * we put the information necesary to it work
+                 */
+                if (level.getData() != null) {
+                        try {
+                                GameState.grid = (List<Cube>) DTOUtils.stringToObj(level.getData());
+                        } catch (ClassNotFoundException | IOException e) {
+                                System.out.println("Error al cargar la info:\n" + e);
+                        }
+                } else {
+                        GameState.grid = new ArrayList<>();
+                        // Spawn of player
+                        GameState.grid.add(new Player(new PVector(0, 0), new Color(255, 255, 255)));
                 }
         }
 
