@@ -70,6 +70,7 @@ public class MainWindow extends JFrame implements Runnable {
         this.canvas.addKeyListener(keyboard);
         this.canvas.addMouseListener(mouse);
         this.canvas.addMouseMotionListener(mouse);
+        this.canvas.addMouseWheelListener(mouse);
 
         // Creamos el limitador de FPS
         this.FPS = 60;

@@ -2,6 +2,7 @@ package inputs;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
 
 import ui.Button;
 
@@ -18,8 +19,12 @@ public class Mouse extends MouseAdapter {
      * By default the position of mouse is (0, 0)
      */
     public static int x, y;
-    /* this boolean return if one of the mouse button is pressed at the moment */
-    public static boolean mousePressed;
+    /*
+     * mousePressed return true if one of the mouse button is pressed at the moment
+     * mouseWheelUp return true if mouse wheel is move up
+     * mouseWheelDown return true if mouse wheel is move down
+     */
+    public static boolean mousePressed, mouseWheelUp, mouseWheelDown;
     /*
      * left return a true if button pressed left of mouse is pressed
      * center return a true if button pressed center of mouse is pressed
@@ -111,5 +116,23 @@ public class Mouse extends MouseAdapter {
         // When then the x and y get the position of mouse
         x = e.getX();
         y = e.getY();
+    }
+
+    /**
+     * This funcion only is active when the wheel mouse is moving
+     * 
+     * @param e
+     */
+
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e) {
+        // Always need to be resset
+        if (e.getWheelRotation() < 0) {
+            System.out.println("mouse wheel Up");
+            mouseWheelUp = true;
+        } else if (e.getWheelRotation() > 0) {
+            System.out.println("mouse wheel Down");
+            mouseWheelDown = true;
+        }
     }
 }
