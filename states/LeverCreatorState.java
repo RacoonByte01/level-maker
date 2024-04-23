@@ -51,7 +51,7 @@ public class LeverCreatorState extends State {
         }
         Keyboard.key = null;
         this.angle = 0;
-        this.blockCards = new BlockCard[20];
+        this.blockCards = new BlockCard[12];
         for (int i = 0; i < blockCards.length; i++) {
             blockCards[i] = new BlockCard(i, i + "");
         }
@@ -65,7 +65,7 @@ public class LeverCreatorState extends State {
         }
         if (Mouse.x >= 0 && Mouse.x <= Settings.cellSize * 2) {
             if (Mouse.mouseWheelDown) {
-                if (scroll > -(blockCards.length - 12) * 60) {
+                if (scroll > -(blockCards.length - 11) * 60) {
                     scroll -= 72;
                 }
             } else if (Mouse.mouseWheelUp) {
