@@ -128,10 +128,10 @@ public class Mouse extends MouseAdapter {
     public void mouseWheelMoved(MouseWheelEvent e) {
         // Always need to be resset
         if (e.getWheelRotation() < 0) {
-            System.out.println("mouse wheel Up");
+            // System.out.println("mouse wheel Up");
             mouseWheelUp = true;
         } else if (e.getWheelRotation() > 0) {
-            System.out.println("mouse wheel Down");
+            // System.out.println("mouse wheel Down");
             mouseWheelDown = true;
         }
     }

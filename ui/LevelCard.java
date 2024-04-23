@@ -37,39 +37,39 @@ public class LevelCard {
         this.isSelected = false;
     }
 
-    public void update() {
+    public void update(int scroly) {
         if (isSelected) {
             idSelected = level.getId();
         } else {
             colBox = colNotSelect;
         }
         if (Mouse.x >= loc.x - tam.x / 2 && Mouse.x <= loc.x + tam.x / 2 &&
-                Mouse.y >= loc.y - tam.y / 2 && Mouse.y <= loc.y + tam.y / 2) {
+                Mouse.y >= loc.y + scroly - tam.y / 2 && Mouse.y <= loc.y + scroly + tam.y / 2) {
             colBox = colSelect;
             if (Mouse.left) {
                 Keyboard.key = null;
                 isSelected = true;
             }
         } else if (!(Mouse.x >= loc.x - tam.x / 2 && Mouse.x <= loc.x + tam.x / 2 &&
-                Mouse.y >= loc.y - tam.y / 2 && Mouse.y <= loc.y + tam.y / 2) && Mouse.left) {
+                Mouse.y >= loc.y + scroly - tam.y / 2 && Mouse.y <= loc.y + scroly + tam.y / 2) && Mouse.left) {
             isSelected = false;
             idSelected = null;
         }
     }
 
-    public void draw(Graphics g) {
+    public void draw(Graphics g, int scroly) {
         g.setColor(colBox);
-        g.fillRect((int) (loc.x - tam.x / 2), (int) (loc.y - tam.y / 2), (int) tam.x, (int) tam.y);
+        g.fillRect((int) (loc.x - tam.x / 2), (int) (loc.y + scroly - tam.y / 2), (int) tam.x, (int) tam.y);
 
         FontMetrics fontMetrics = g.getFontMetrics();
         g.setColor(colText);
-        Text.drawText(g, level.getNombre(), loc.x - tam.x / 2 + 10, loc.y + fontMetrics.getHeight() / 3, false,
+        Text.drawText(g, level.getNombre(), loc.x - tam.x / 2 + 10, loc.y + scroly + fontMetrics.getHeight() / 3, false,
                 new Font("Dialog", Font.PLAIN, 25));
 
         fontMetrics = g.getFontMetrics();
         Text.drawText(g, level.getFechaCreacion(),
                 loc.x + tam.x / 2 - fontMetrics.stringWidth(level.getFechaCreacion()) + 20,
-                loc.y + fontMetrics.getHeight() * 2 / 3, false,
+                loc.y + scroly + fontMetrics.getHeight() * 2 / 3, false,
                 new Font("Dialog", Font.PLAIN, 14));
     }
 

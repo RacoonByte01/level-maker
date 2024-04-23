@@ -7,6 +7,7 @@ import java.util.List;
 import db.crud.LevelCRUD;
 import db.dto.LevelDTO;
 import db.dto.UserDTO;
+import inputs.Mouse;
 import settings.Constants;
 import settings.Settings;
 import ui.Acttion;
@@ -20,6 +21,7 @@ import ui.LevelCard;
  * @version 1.0
  */
 public class SelectLevel extends State {
+    private int scroll;
     public static UserDTO user;
     List<LevelDTO> levels;
     private LevelCard[] levelCards;
@@ -70,6 +72,7 @@ public class SelectLevel extends State {
                         }
                     }
                 });
+        this.scroll = 0;
     }
 
     @Override
@@ -78,8 +81,20 @@ public class SelectLevel extends State {
             button.update();
         }
         for (LevelCard levelCard : levelCards) {
-            levelCard.update();
+            levelCard.update(scroll);
         }
+        if (Mouse.mouseWheelDown) {
+            if (scroll > -(levelCards.length - 5) * 120) {
+                scroll -= 60;
+            }
+        } else if (Mouse.mouseWheelUp) {
+            if (scroll < 0) {
+                scroll += 60;
+            }
+        }
+        /* Reset the scroll */
+        Mouse.mouseWheelDown = false;
+        Mouse.mouseWheelUp = false;
     }
 
     @Override
@@ -87,7 +102,7 @@ public class SelectLevel extends State {
         g.setColor(new Color(0));
         g.fillRect(0, 0, Settings.width, Settings.height);
         for (LevelCard levelCard : levelCards) {
-            levelCard.draw(g);
+            levelCard.draw(g, scroll);
         }
         g.setColor(new Color(0));
         g.fillRect(0, Settings.height * 4 / 5, Settings.width, Settings.height * 1 / 5);
