@@ -57,7 +57,8 @@ public class GameState extends State {
                 } else {
                         GameState.grid = new ArrayList<>();
                         // Spawn of player
-                        GameState.grid.add(new Player(new PVector(0, 0), new Color(255, 255, 255)));
+                        GameState.grid.add(new Player(new PVector(0, 0), "assets/player/player.png"));
+                        // GameState.grid.add(new Player(new PVector(0, 0), new Color(255, 255, 255)));
                 }
         }
 

@@ -20,6 +20,13 @@ public class Player extends DinamicCube {
 
     }
 
+    public Player(PVector loc, String asset) {
+        super(loc, asset);
+        // Where g = y
+        this.acc = new PVector(0, 4f);
+
+    }
+
     /**
      * This function can move the player if the user press any of the keys
      */

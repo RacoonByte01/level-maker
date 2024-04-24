@@ -28,7 +28,7 @@ public class LeverCreatorState extends State {
     public LevelDTO level;
     private boolean isPressed;
     public List<Cube> grid;
-    public int angle;
+    public static int angle;
     private BlockCard[] blockCards;
     private int scroll;
 
@@ -47,14 +47,21 @@ public class LeverCreatorState extends State {
         } else {
             this.grid = new ArrayList<>();
             // Spawn of player
-            this.grid.add(new Player(new PVector(0, 0), new Color(255, 255, 255)));
+            // this.grid.add(new Player(new PVector(0, 0), new Color(255, 255, 255)));
+            this.grid.add(new Player(new PVector(0, 0), "assets/player/player.png"));
         }
         Keyboard.key = null;
-        this.angle = 0;
-        this.blockCards = new BlockCard[12];
-        for (int i = 0; i < blockCards.length; i++) {
-            blockCards[i] = new BlockCard(i, i + "");
-        }
+        LeverCreatorState.angle = 0;
+        this.blockCards = new BlockCard[6];
+        // for (int i = 0; i < blockCards.length; i++) {
+        // blockCards[i] = new BlockCard(i, i + "");
+        // }
+        blockCards[0] = new BlockCard(0, "assets/dirt/dirt.png");
+        blockCards[1] = new BlockCard(1, "assets/grass/grass-all.png");
+        blockCards[2] = new BlockCard(2, "assets/grass/grass-up.png");
+        blockCards[3] = new BlockCard(3, "assets/grass/grass-corner.png");
+        blockCards[4] = new BlockCard(4, "assets/grass/grass-up-down.png");
+        blockCards[5] = new BlockCard(5, "assets/grass/grass-up-down-side.png");
     }
 
     @Override
@@ -86,9 +93,9 @@ public class LeverCreatorState extends State {
                             wasLoc = true;
                         }
                     }
-                    if (!wasLoc) {
+                    if (!wasLoc && BlockCard.getAssetSeleceted() != null) {
                         // grid.add(new Cube(press, new Color(255, 0, 0)));
-                        grid.add(new Cube(press, "assets/grass/grass-all.png", angle));
+                        grid.add(new Cube(press, BlockCard.getAssetSeleceted(), angle));
                     }
                 } else if (Mouse.right && !(press.x == 0 && press.y == 0)) {
                     for (int i = 0; i < grid.size(); i++) {
@@ -146,7 +153,7 @@ public class LeverCreatorState extends State {
         g.setColor(new Color(71, 71, 90));
         g.fillRect(0, 0, Settings.cellSize * 2, Settings.height);
         for (BlockCard blockCard : blockCards) {
-            blockCard.draw(g, scroll);
+            blockCard.draw(g, scroll, angle);
         }
     }
 

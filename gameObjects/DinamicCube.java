@@ -29,6 +29,18 @@ public class DinamicCube extends Cube {
         this(loc, col, null);
     }
 
+    public DinamicCube(PVector loc, String asset) {
+        this(loc, asset, null);
+    }
+
+    public DinamicCube(PVector loc, String asset, Integer velLimit) {
+        super(loc, asset);
+        vel = new PVector(0, 0);
+        acc = new PVector(0, 0);
+        this.velLimit = velLimit;
+        canJump = false;
+    }
+
     @Override
     public void update() {
         vel.add(acc);
