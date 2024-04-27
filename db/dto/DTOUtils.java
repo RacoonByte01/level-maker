@@ -55,7 +55,7 @@ public class DTOUtils {
         Date current = new Date();
         // And set the format day/month/year hour:minute
         // Example format 18/04/2024 23:39
-        SimpleDateFormat objSDF = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        SimpleDateFormat objSDF = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         return objSDF.format(current);
     }
 

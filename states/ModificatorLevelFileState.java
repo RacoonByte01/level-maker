@@ -28,7 +28,7 @@ public class ModificatorLevelFileState extends State {
 
     public ModificatorLevelFileState(LevelDTO level) {
         textBoxName = new TextBox(Settings.width / 2, Settings.height / 2, Settings.width * 2 / 3, 55,
-                "Nombre del nivel", 30);
+                "Nombre del nivel", 20);
         if (level != null) {
             this.level = level;
             textBoxName.setText(level.getNombre());

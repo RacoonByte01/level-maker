@@ -11,6 +11,7 @@ import inputs.Mouse;
 import raccoon.PVector;
 import settings.Constants;
 import settings.Settings;
+import states.LeverCreatorState;
 
 /**
  * LevelCard
@@ -39,9 +40,7 @@ public class LevelCard {
     }
 
     public void update(int scroly) {
-        if (isSelected) {
-            idSelected = level.getId();
-        } else {
+        if (!(isSelected && idSelected == level.getId())) {
             colBox = colNotSelect;
         }
         if (Mouse.x >= loc.x - tam.x / 2 && Mouse.x <= loc.x + tam.x / 2 &&
@@ -50,11 +49,9 @@ public class LevelCard {
             if (Mouse.left) {
                 Keyboard.key = null;
                 isSelected = true;
+                idSelected = level.getId();
+                LeverCreatorState.angle = 0;
             }
-        } else if (!(Mouse.x >= loc.x - tam.x / 2 && Mouse.x <= loc.x + tam.x / 2 &&
-                Mouse.y >= loc.y + scroly - tam.y / 2 && Mouse.y <= loc.y + scroly + tam.y / 2) && Mouse.left) {
-            isSelected = false;
-            idSelected = null;
         }
     }
 
@@ -63,16 +60,22 @@ public class LevelCard {
         g.fillRect((int) (loc.x - tam.x / 2), (int) (loc.y + scroly - tam.y / 2), (int) tam.x, (int) tam.y);
         FontMetrics fontMetrics = g.getFontMetrics();
         g.setColor(colText);
-        Text.drawText(g, level.getNombre(), loc.x - tam.x / 2 + 10, loc.y + scroly + fontMetrics.getHeight() / 3, false,
+        Text.drawText(g, level.getNombre(), loc.x - tam.x / 2 + 20, loc.y + scroly + fontMetrics.getHeight() / 3, false,
                 new Font("Dialog", Font.PLAIN, 25));
         fontMetrics = g.getFontMetrics();
         Text.drawText(g, level.getFechaCreacion(),
-                loc.x + tam.x / 2 - fontMetrics.stringWidth(level.getFechaCreacion()) + 20,
+                loc.x + tam.x / 2 - fontMetrics.stringWidth(level.getFechaCreacion()) + 70,
                 loc.y + scroly + fontMetrics.getHeight() * 2 / 3, false,
                 new Font("Dialog", Font.PLAIN, 14));
     }
 
     public static Integer getIdSelected() {
         return idSelected;
+    }
+
+    public void notMouse() {
+        if (idSelected != level.getId()) {
+            colBox = colNotSelect;
+        }
     }
 }

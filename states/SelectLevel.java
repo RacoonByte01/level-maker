@@ -79,16 +79,22 @@ public class SelectLevel extends State {
         for (Button button : buttons) {
             button.update();
         }
-        for (LevelCard levelCard : levelCards) {
-            levelCard.update(scroll);
-        }
-        if (Mouse.mouseWheelDown) {
-            if (scroll > -(levelCards.length - 5) * 120) {
-                scroll -= 60;
+        if (Mouse.y < Settings.height * 4 / 5) {
+            for (LevelCard levelCard : levelCards) {
+                levelCard.update(scroll);
             }
-        } else if (Mouse.mouseWheelUp) {
-            if (scroll < 0) {
-                scroll += 60;
+            if (Mouse.mouseWheelDown) {
+                if (scroll > -(levelCards.length - 5) * 120) {
+                    scroll -= 60;
+                }
+            } else if (Mouse.mouseWheelUp) {
+                if (scroll < 0) {
+                    scroll += 60;
+                }
+            }
+        } else {
+            for (LevelCard levelCard : levelCards) {
+                levelCard.notMouse();
             }
         }
         /* Reset the scroll */
