@@ -12,35 +12,35 @@ import settings.Settings;
 import ui.Acttion;
 import ui.Text;
 import ui.Button;
-import ui.MesajeError;
+import ui.MessageError;
 import ui.TextBox;
 
 public class RegisterState extends State {
     Button[] buttons = new Button[2];
     TextBox[] textBoxs = new TextBox[4];
-    MesajeError mesajeError;
+    MessageError messageError;
 
     public RegisterState() {
         textBoxs[0] = new TextBox(Settings.width / 2, Settings.height * 2 / 8, 500, 50, "Correo *", 20);
         textBoxs[1] = new TextBox(Settings.width / 2, Settings.height * 3 / 8, 500, 50, "Contraseña *", 20, true);
         textBoxs[2] = new TextBox(Settings.width / 2, Settings.height * 4 / 8, 500, 50, "Nombre *", 20);
         textBoxs[3] = new TextBox(Settings.width / 2, Settings.height * 5 / 8, 500, 50, "Telefono", 20);
-        mesajeError = new MesajeError(Settings.width / 2, Settings.height * 6 / 8, 500, 50);
+        messageError = new MessageError(Settings.width / 2, Settings.height * 6 / 8, 500, 50);
         buttons[0] = new Button(Settings.width * 3 / 5, Settings.height * 5 / 6, "Registrarse >", new Acttion() {
             @Override
             public void accionARealizar() {
                 if (!isEmail(textBoxs[0].getText().trim().toLowerCase())) {
-                    mesajeError.setText("El correo no es valido");
-                    mesajeError.setVisibleTime(250);
+                    messageError.setText("El correo no es valido");
+                    messageError.setVisibleTime(250);
                 } else if (!isPasswd(textBoxs[1].getText())) {
-                    mesajeError.setText("La contraseña debe de tener minimo 8 caracteres");
-                    mesajeError.setVisibleTime(250);
+                    messageError.setText("La contraseña debe de tener minimo 8 caracteres");
+                    messageError.setVisibleTime(250);
                 } else if (!isName(textBoxs[2].getText().trim())) {
-                    mesajeError.setText("Su nombre debe tener minimo 4 carcteres");
-                    mesajeError.setVisibleTime(250);
+                    messageError.setText("Su nombre debe tener minimo 4 carcteres");
+                    messageError.setVisibleTime(250);
                 } else if (!(textBoxs[3].getText().equals("") || isTel(textBoxs[3].getText()))) {
-                    mesajeError.setText("Su numero de telefono no es correcto");
-                    mesajeError.setVisibleTime(250);
+                    messageError.setText("Su numero de telefono no es correcto");
+                    messageError.setVisibleTime(250);
                 } else {
                     try {
                         UserDTO user = new UserDTO(
@@ -50,17 +50,14 @@ public class RegisterState extends State {
                                 textBoxs[3].getText().trim().toLowerCase());
                         boolean isInserted = new UserCRUD().insert(user);
                         if (isInserted) {
-                            System.out.println("Se registro sin problemas");
-                            State.setActualState(new LoggingState());
-                            mesajeError.setText("Registrado Correctamente");
-                            mesajeError.setVisibleTime(250);
+                            LoggingState.loggin(user.getCorreo(), textBoxs[1].getText());
                         } else {
-                            mesajeError.setText("Este correo ya esta registrado");
-                            mesajeError.setVisibleTime(250);
+                            messageError.setText("¡Este correo ya esta registrado!");
+                            messageError.setVisibleTime(250);
                         }
                     } catch (Exception e) {
-                        mesajeError.setText("Error de conexión revise su conexion a internet");
-                        mesajeError.setVisibleTime(250);
+                        messageError.setText("!Error de conexión revise su conexion a internet!");
+                        messageError.setVisibleTime(250);
                     }
                 }
             }
@@ -81,7 +78,7 @@ public class RegisterState extends State {
         for (TextBox textBox : textBoxs) {
             textBox.update();
         }
-        mesajeError.update();
+        messageError.update();
     }
 
     @Override
@@ -97,7 +94,7 @@ public class RegisterState extends State {
         g.setColor(new Color(255, 255, 255));
         Text.drawText(g, "Registrarse", Settings.width / 2, (int) (Settings.height * .7 / 6), true,
                 new Font("Dialog", Font.PLAIN, 50));
-        mesajeError.darw(g);
+        messageError.darw(g);
     }
 
     /**

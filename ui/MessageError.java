@@ -8,12 +8,12 @@ import inputs.Mouse;
 import raccoon.PVector;
 import settings.Constants;
 
-public class MesajeError {
+public class MessageError {
     private PVector loc, tam;
     private int timeVisible;
     private String text;
 
-    public MesajeError(float x, float y, float tamx, float tamy) {
+    public MessageError(float x, float y, float tamx, float tamy) {
         this.loc = new PVector(x, y);
         this.tam = new PVector(tamx, tamy);
         this.text = "";

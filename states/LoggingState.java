@@ -2,6 +2,7 @@ package states;
 
 import ui.Acttion;
 import ui.Button;
+import ui.MessageError;
 import ui.Text;
 import ui.TextBox;
 
@@ -28,26 +29,24 @@ import settings.Settings;
 public class LoggingState extends State {
     Button[] buttons = new Button[2];
     TextBox[] textBoxs = new TextBox[2];
+    private static MessageError messageError;
     // CheckBox checkBox;
 
     public LoggingState() {
-        textBoxs[0] = new TextBox(Settings.width / 2, Settings.height * 2 / 6, 500, 50, "Correo", 20);
-        textBoxs[1] = new TextBox(Settings.width / 2, Settings.height * 3 / 6, 500, 50, "Contraseña", 20, true);
+        textBoxs[0] = new TextBox(Settings.width / 2, Settings.height * 2 / 6, 500, 50, "Correo *", 20);
+        textBoxs[1] = new TextBox(Settings.width / 2, Settings.height * 3 / 6, 500, 50, "Contraseña *", 20, true);
+        messageError = new MessageError(Settings.width / 2, Settings.height * 4 / 6, 500, 50);
         // checkBox = new CheckBox(Settings.width / 2 - "Recuerdame".length() * 13 / 2,
         // Settings.height * 4 / 6,
         // "Recuerdame", false, 20);
         buttons[0] = new Button(Settings.width * 3 / 5, Settings.height * 5 / 6, "Iniciar sesion >", new Acttion() {
             @Override
             public void accionARealizar() {
-                UserDTO user = (UserDTO) new UserCRUD().select(textBoxs[0].getText());
-                if (user != null && user.getPass().equals(DTOUtils.getMD5(textBoxs[1].getText()))) {
-                    // TODO code read and represent all levels
-                    @SuppressWarnings("unchecked")
-                    List<LevelDTO> levels = (List<LevelDTO>) new LevelCRUD().select(user.getCorreo());
-                    State.setActualState(new SelectLevel(levels, user));
-                } else {
-                    // TODO code error
-                    System.out.println("MAL");
+                try {
+                    loggin(textBoxs[0].getText(), textBoxs[1].getText());
+                } catch (Exception e) {
+                    messageError.setText("¡Error de conexión revise su conexion a internet!");
+                    messageError.setVisibleTime(250);
                 }
             }
         });
@@ -67,6 +66,7 @@ public class LoggingState extends State {
         for (TextBox textBox : textBoxs) {
             textBox.update();
         }
+        messageError.update();
     }
 
     @Override
@@ -82,10 +82,19 @@ public class LoggingState extends State {
         g.setColor(new Color(255, 255, 255));
         Text.drawText(g, "Inicio de Sesión", Settings.width / 2, (int) (Settings.height * .7 / 6), true,
                 new Font("Dialog", Font.PLAIN, 50));
-        Text.drawText(g, "No estas registrado aun?", Settings.width / 2, (int) (Settings.height * 4 / 6), true,
-                new Font("Dialog", Font.PLAIN, 16));
-        Text.drawText(g, "pulse el boton \"Registrar\"", Settings.width / 2, (int) (Settings.height * 4 / 6) + 18, true,
-                new Font("Dialog", Font.PLAIN, 16));
         // checkBox.draw(g);
+        messageError.darw(g);
+    }
+
+    public static void loggin(String email, String pass) {
+        UserDTO user = (UserDTO) new UserCRUD().select(email);
+        if (user != null && user.getPass().equals(DTOUtils.getMD5(pass))) {
+            @SuppressWarnings("unchecked")
+            List<LevelDTO> levels = (List<LevelDTO>) new LevelCRUD().select(user.getCorreo());
+            State.setActualState(new SelectLevel(levels, user));
+        } else {
+            messageError.setText("¡Error al iniciar sesion! Puede que no este registrado");
+            messageError.setVisibleTime(250);
+        }
     }
 }
