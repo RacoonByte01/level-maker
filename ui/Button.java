@@ -15,7 +15,6 @@ import settings.Constants;
  * @version 1.1
  */
 public class Button {
-    public static boolean restart = true;
     private boolean buttonPressed;
     private String text;
     PVector loc;
@@ -63,7 +62,7 @@ public class Button {
                 Mouse.y >= loc.y - Constants.tamButomY / 2
                 && Mouse.y <= loc.y - Constants.tamButomY / 2 + Constants.tamButomY) {
             col = Constants.cols[7];
-            if (Mouse.left) {
+            if (Mouse.left && Mouse.mousePressed) {
                 buttonPressed = true;
             } else {
                 buttonPressed = false;
@@ -72,10 +71,9 @@ public class Button {
             col = Constants.cols[4];
         }
 
-        if (buttonPressed && restart) {
-            Mouse.mousePressed = false;
+        if (buttonPressed) {
             acttion.accionARealizar();
-            Button.restart = false;
+            Mouse.mousePressed = false;
         }
     }
 }
