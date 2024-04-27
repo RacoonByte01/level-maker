@@ -9,6 +9,7 @@ import db.dto.LevelDTO;
 import inputs.Keyboard;
 import inputs.Mouse;
 import raccoon.PVector;
+import settings.Constants;
 import settings.Settings;
 
 /**
@@ -31,9 +32,9 @@ public class LevelCard {
         this.level = level;
         // Set some parameters by default
         this.colText = new Color(255, 255, 255);
-        this.colNotSelect = new Color(51, 51, 51);
-        this.colSelect = new Color(100, 100, 100);
-        this.colBox = colNotSelect;
+        this.colNotSelect = Constants.cols[4];
+        this.colSelect = Constants.cols[7];
+        this.colBox = Constants.cols[4];
         this.isSelected = false;
     }
 

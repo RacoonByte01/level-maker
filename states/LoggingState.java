@@ -15,6 +15,7 @@ import db.crud.UserCRUD;
 import db.dto.DTOUtils;
 import db.dto.LevelDTO;
 import db.dto.UserDTO;
+import settings.Constants;
 import settings.Settings;
 
 /**
@@ -70,7 +71,7 @@ public class LoggingState extends State {
 
     @Override
     public void draw(Graphics g) {
-        g.setColor(new Color(0));
+        g.setColor(Constants.cols[0]);
         g.fillRect(0, 0, Settings.width, Settings.height);
         for (Button button : buttons) {
             button.draw(g);
@@ -78,7 +79,6 @@ public class LoggingState extends State {
         for (TextBox textBox : textBoxs) {
             textBox.draw(g);
         }
-
         g.setColor(new Color(255, 255, 255));
         Text.drawText(g, "Inicio de Sesión", Settings.width / 2, (int) (Settings.height * .7 / 6), true,
                 new Font("Dialog", Font.PLAIN, 50));
@@ -88,5 +88,4 @@ public class LoggingState extends State {
                 new Font("Dialog", Font.PLAIN, 16));
         // checkBox.draw(g);
     }
-
 }

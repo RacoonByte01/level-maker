@@ -8,6 +8,7 @@ import java.awt.Graphics;
 import inputs.Keyboard;
 import inputs.Mouse;
 import raccoon.PVector;
+import settings.Constants;
 
 /**
  * TextBox
@@ -58,9 +59,9 @@ public class TextBox {
         this.isPassword = isPassword;
         // Set some parameters by default
         this.colText = new Color(255, 255, 255);
-        this.colNotSelect = new Color(51, 51, 51);
-        this.colSelect = new Color(100, 100, 100);
-        this.colBox = colNotSelect;
+        this.colNotSelect = Constants.cols[4];
+        this.colSelect = Constants.cols[7];
+        this.colBox = Constants.cols[4];
         this.isSelected = false;
     }
 
@@ -74,7 +75,7 @@ public class TextBox {
         g.fillRect((int) (loc.x - tam.x / 2), (int) (loc.y - tam.y / 2), (int) tam.x, (int) tam.y);
         FontMetrics fontMetrics = g.getFontMetrics();
         if (text.length() == 0) {
-            g.setColor(new Color(155, 155, 155));
+            g.setColor(Constants.cols[8]);
             Text.drawText(g, textInicio, loc.x - tam.x / 2 + 10, loc.y + fontMetrics.getHeight() / 3, false,
                     new Font("Dialog", Font.PLAIN, size));
         } else {

@@ -33,7 +33,6 @@ public class Button {
     public Button(int x, int y, String text, Acttion acttion) {
         this.loc = new PVector(x, y);
         this.text = text;
-        this.col = new Color(51, 51, 51);
         this.buttonPressed = false;
         this.acttion = acttion;
     }
@@ -63,14 +62,14 @@ public class Button {
                 && Mouse.x <= loc.x - Constants.tamButomX / 2 + Constants.tamButomX &&
                 Mouse.y >= loc.y - Constants.tamButomY / 2
                 && Mouse.y <= loc.y - Constants.tamButomY / 2 + Constants.tamButomY) {
-            col = new Color(100, 100, 100);
+            col = Constants.cols[7];
             if (Mouse.left) {
                 buttonPressed = true;
             } else {
                 buttonPressed = false;
             }
         } else {
-            col = new Color(51, 51, 51);
+            col = Constants.cols[4];
         }
 
         if (buttonPressed && restart) {

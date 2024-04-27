@@ -1,6 +1,5 @@
 package states;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,6 +12,7 @@ import gameObjects.Cube;
 import gameObjects.Player;
 import inputs.Keyboard;
 import raccoon.PVector;
+import settings.Constants;
 import settings.Settings;
 
 /**
@@ -78,7 +78,7 @@ public class GameState extends State {
 
         @Override
         public void draw(Graphics g) {
-                g.setColor(new Color(51, 51, 65));
+                g.setColor(Constants.cols[0]);
                 g.fillRect(0, 0, Settings.width, Settings.height);
                 Player player = (Player) grid.get(0);
                 g.translate((int) -player.getLoc().x + Settings.width / 2,

@@ -1,6 +1,5 @@
 package states;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.util.List;
 
@@ -99,12 +98,12 @@ public class SelectLevel extends State {
 
     @Override
     public void draw(Graphics g) {
-        g.setColor(new Color(0));
+        g.setColor(Constants.cols[0]);
         g.fillRect(0, 0, Settings.width, Settings.height);
         for (LevelCard levelCard : levelCards) {
             levelCard.draw(g, scroll);
         }
-        g.setColor(new Color(0));
+        g.setColor(Constants.cols[0]);
         g.fillRect(0, Settings.height * 4 / 5, Settings.width, Settings.height * 1 / 5);
         for (Button button : buttons) {
             button.draw(g);

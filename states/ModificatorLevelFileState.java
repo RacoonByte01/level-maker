@@ -1,11 +1,11 @@
 package states;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.util.List;
 
 import db.crud.LevelCRUD;
 import db.dto.LevelDTO;
+import settings.Constants;
 import settings.Settings;
 import ui.Acttion;
 import ui.Button;
@@ -54,10 +54,9 @@ public class ModificatorLevelFileState extends State {
 
     @Override
     public void draw(Graphics g) {
-        g.setColor(new Color(0));
+        g.setColor(Constants.cols[0]);
         g.fillRect(0, 0, Settings.width, Settings.height);
         textBoxName.draw(g);
         buttonSend.draw(g);
     }
-
 }

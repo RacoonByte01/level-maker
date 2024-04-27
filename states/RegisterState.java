@@ -6,6 +6,7 @@ import java.awt.Graphics;
 
 import db.crud.UserCRUD;
 import db.dto.UserDTO;
+import settings.Constants;
 import settings.Settings;
 import ui.Acttion;
 import ui.Text;
@@ -60,7 +61,7 @@ public class RegisterState extends State {
 
     @Override
     public void draw(Graphics g) {
-        g.setColor(new Color(0));
+        g.setColor(Constants.cols[0]);
         g.fillRect(0, 0, Settings.width, Settings.height);
         for (Button button : buttons) {
             button.draw(g);

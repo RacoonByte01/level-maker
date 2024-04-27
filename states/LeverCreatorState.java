@@ -1,6 +1,5 @@
 package states;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,6 +11,7 @@ import db.dto.LevelDTO;
 import inputs.Keyboard;
 import inputs.Mouse;
 import raccoon.PVector;
+import settings.Constants;
 import settings.Settings;
 import ui.BlockCard;
 import gameObjects.Cube;
@@ -143,14 +143,14 @@ public class LeverCreatorState extends State {
 
     @Override
     public void draw(Graphics g) {
-        g.setColor(new Color(51, 51, 65));
+        g.setColor(Constants.cols[0]);
         g.fillRect(0, 0, Settings.width, Settings.height);
         g.translate((int) locCam.x, (int) locCam.y);
         for (Cube cube : grid) {
             cube.draw(g);
         }
         g.translate((int) -locCam.x, (int) -locCam.y);
-        g.setColor(new Color(71, 71, 90));
+        g.setColor(Constants.cols[5]);
         g.fillRect(0, 0, Settings.cellSize * 2, Settings.height);
         for (BlockCard blockCard : blockCards) {
             blockCard.draw(g, scroll, angle);

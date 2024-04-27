@@ -13,6 +13,7 @@ import javax.imageio.ImageIO;
 import inputs.Keyboard;
 import inputs.Mouse;
 import raccoon.PVector;
+import settings.Constants;
 import settings.Settings;
 import states.LeverCreatorState;
 
@@ -34,8 +35,8 @@ public class BlockCard {
         this.tam = new PVector(Settings.cellSize * 5 / 3, Settings.cellSize * 5 / 3);
         this.loc = new PVector(this.tam.x / 2 + this.tam.x / 10, y * (this.tam.y + 5) + (this.tam.y * 2 / 3 + 5));
         // Set some parameters by default
-        this.colNotSelect = new Color(51, 51, 51);
-        this.colSelect = new Color(100, 100, 100);
+        this.colNotSelect = Constants.cols[2];
+        this.colSelect = Constants.cols[4];
         this.colBox = colNotSelect;
         this.isSelected = false;
         this.asset = asset;
