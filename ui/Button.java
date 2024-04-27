@@ -74,6 +74,7 @@ public class Button {
         if (buttonPressed) {
             acttion.accionARealizar();
             Mouse.mousePressed = false;
+            buttonPressed = false;
         }
     }
 }

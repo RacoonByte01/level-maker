@@ -21,7 +21,7 @@ public class MainWindow extends JFrame implements Runnable {
     private Canvas canvas;
     private Thread thread;
     public static boolean funcionar;
-    int frameCount;
+    public static long frameCount;
     BufferStrategy bs;
     Graphics g;
 

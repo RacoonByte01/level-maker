@@ -29,11 +29,11 @@ public class Text {
          * Font menuFont = new Font("Dialog", Font.PLAIN, size);
          */
         g.setFont(font);
+        // Get the font metrics
+        FontMetrics fontMetrics = g.getFontMetrics();
         PVector loc = new PVector(x, y);
 
         if (center) { // If is center
-            // Get the font metrics
-            FontMetrics fontMetrics = g.getFontMetrics();
             // We move the text one half of its length in both x and y
             loc.x = loc.x - fontMetrics.stringWidth(text) / 2;
             loc.y = loc.y + fontMetrics.getHeight() / 2;

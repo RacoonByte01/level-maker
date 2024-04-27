@@ -32,7 +32,7 @@ public class LoggingState extends State {
 
     public LoggingState() {
         textBoxs[0] = new TextBox(Settings.width / 2, Settings.height * 2 / 6, 500, 50, "Correo", 20);
-        textBoxs[1] = new TextBox(Settings.width / 2, Settings.height * 3 / 6, 500, 50, "Password", 20, true);
+        textBoxs[1] = new TextBox(Settings.width / 2, Settings.height * 3 / 6, 500, 50, "Contraseña", 20, true);
         // checkBox = new CheckBox(Settings.width / 2 - "Recuerdame".length() * 13 / 2,
         // Settings.height * 4 / 6,
         // "Recuerdame", false, 20);
