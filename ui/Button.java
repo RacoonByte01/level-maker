@@ -15,8 +15,8 @@ import settings.Constants;
  * @version 1.1
  */
 public class Button {
-    private boolean buttonPressed;
-    private String text;
+    protected boolean buttonPressed;
+    protected String text;
     PVector loc;
     Color col;
     Acttion acttion;

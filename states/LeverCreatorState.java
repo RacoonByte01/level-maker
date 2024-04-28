@@ -13,7 +13,9 @@ import inputs.Mouse;
 import raccoon.PVector;
 import settings.Constants;
 import settings.Settings;
+import ui.Acttion;
 import ui.BlockCard;
+import ui.ImgButton;
 import gameObjects.Cube;
 import gameObjects.Player;
 
@@ -29,8 +31,9 @@ public class LeverCreatorState extends State {
     private boolean isPressed;
     public List<Cube> grid;
     public static int angle;
-    private BlockCard[] blockCards;
+    private List<BlockCard> blockCards;
     private int scroll;
+    ImgButton imgButton;
 
     @SuppressWarnings("unchecked")
     public LeverCreatorState(LevelDTO level) {
@@ -47,18 +50,24 @@ public class LeverCreatorState extends State {
         } else {
             this.grid = new ArrayList<>();
             // Spawn of player
-            // this.grid.add(new Player(new PVector(0, 0), new Color(255, 255, 255)));
             this.grid.add(new Player(new PVector(0, 0), "assets/blocks/player/player.png"));
         }
         Keyboard.key = null;
         LeverCreatorState.angle = 0;
-        this.blockCards = new BlockCard[6];
-        blockCards[0] = new BlockCard(0, "assets/blocks/dirt/dirt.png");
-        blockCards[1] = new BlockCard(1, "assets/blocks/grass/grass-all.png");
-        blockCards[2] = new BlockCard(2, "assets/blocks/grass/grass-up.png");
-        blockCards[3] = new BlockCard(3, "assets/blocks/grass/grass-corner.png");
-        blockCards[4] = new BlockCard(4, "assets/blocks/grass/grass-up-down.png");
-        blockCards[5] = new BlockCard(5, "assets/blocks/grass/grass-up-down-side.png");
+        blockCards = new ArrayList<>();
+        blockCards.add(new BlockCard(0, "assets/blocks/dirt/dirt.png"));
+        blockCards.add(new BlockCard(1, "assets/blocks/grass/grass-all.png"));
+        blockCards.add(new BlockCard(2, "assets/blocks/grass/grass-up.png"));
+        blockCards.add(new BlockCard(3, "assets/blocks/grass/grass-corner.png"));
+        blockCards.add(new BlockCard(4, "assets/blocks/grass/grass-up-down.png"));
+        blockCards.add(new BlockCard(5, "assets/blocks/grass/grass-up-down-side.png"));
+        imgButton = new ImgButton(Settings.width - 32 * 2, 32, "assets/buttons/cogcustom.png",
+                new Acttion() {
+                    @Override
+                    public void accionARealizar() {
+
+                    }
+                });
     }
 
     @Override
@@ -69,7 +78,7 @@ public class LeverCreatorState extends State {
         }
         if (Mouse.x >= 0 && Mouse.x <= Settings.cellSize * 2) {
             if (Mouse.mouseWheelDown) {
-                if (scroll > -(blockCards.length - 11) * 60) {
+                if (scroll > -(blockCards.size() - 11) * 60) {
                     scroll -= 72;
                 }
             } else if (Mouse.mouseWheelUp) {
@@ -118,6 +127,7 @@ public class LeverCreatorState extends State {
         }
         // System.out.println("scroll: " + scroll + "\n" +
         // BlockCard.getAssetSeleceted());
+        imgButton.update();
     }
 
     private void saveData() {
@@ -152,6 +162,7 @@ public class LeverCreatorState extends State {
         for (BlockCard blockCard : blockCards) {
             blockCard.draw(g, scroll, angle);
         }
+        imgButton.draw(g);
     }
 
     protected void camera() {
