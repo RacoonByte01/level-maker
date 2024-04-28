@@ -21,7 +21,7 @@ import ui.TextBox;
 public class ModificatorLevelFileState extends State {
     LevelDTO level;
     private TextBox textBoxName;
-    private Button buttonSend;
+    private Button[] buttonSends = new Button[2];
     MessageError messageError;
 
     public ModificatorLevelFileState() {
@@ -36,7 +36,7 @@ public class ModificatorLevelFileState extends State {
             this.level = level;
             textBoxName.setText(level.getNombre());
         } else {
-            buttonSend = new Button(Settings.width / 2, Settings.height * 5 / 6, "Crear", new Acttion() {
+            buttonSends[0] = new Button(Settings.width * 3 / 5, Settings.height * 5 / 6, "Crear >", new Acttion() {
                 @Override
                 public void accionARealizar() {
                     if (textBoxName.getText().length() == 0) {
@@ -50,13 +50,21 @@ public class ModificatorLevelFileState extends State {
                     }
                 }
             });
+            buttonSends[1] = new Button(Settings.width * 2 / 5, Settings.height * 5 / 6, "< Cancelar", new Acttion() {
+                @Override
+                public void accionARealizar() {
+                    LoggingState.getLevelsAndReGenState(SelectLevel.user.getCorreo());
+                }
+            });
         }
     }
 
     @Override
     public void update() {
         textBoxName.update();
-        buttonSend.update();
+        for (Button button : buttonSends) {
+            button.update();
+        }
         messageError.update();
     }
 
@@ -65,7 +73,9 @@ public class ModificatorLevelFileState extends State {
         g.setColor(Constants.cols[0]);
         g.fillRect(0, 0, Settings.width, Settings.height);
         textBoxName.draw(g);
-        buttonSend.draw(g);
+        for (Button button : buttonSends) {
+            button.draw(g);
+        }
         messageError.darw(g);
     }
 }

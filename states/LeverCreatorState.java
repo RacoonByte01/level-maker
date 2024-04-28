@@ -53,9 +53,6 @@ public class LeverCreatorState extends State {
         Keyboard.key = null;
         LeverCreatorState.angle = 0;
         this.blockCards = new BlockCard[6];
-        // for (int i = 0; i < blockCards.length; i++) {
-        // blockCards[i] = new BlockCard(i, i + "");
-        // }
         blockCards[0] = new BlockCard(0, "assets/dirt/dirt.png");
         blockCards[1] = new BlockCard(1, "assets/grass/grass-all.png");
         blockCards[2] = new BlockCard(2, "assets/grass/grass-up.png");

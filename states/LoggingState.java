@@ -86,15 +86,20 @@ public class LoggingState extends State {
         messageError.darw(g);
     }
 
-    public static void loggin(String email, String pass) {
+    static void loggin(String email, String pass) {
         UserDTO user = (UserDTO) new UserCRUD().select(email);
         if (user != null && user.getPass().equals(DTOUtils.getMD5(pass))) {
-            @SuppressWarnings("unchecked")
-            List<LevelDTO> levels = (List<LevelDTO>) new LevelCRUD().select(user.getCorreo());
-            State.setActualState(new SelectLevel(levels, user));
+            getLevelsAndReGenState(email);
         } else {
             messageError.setText("¡Error al iniciar sesion! Puede que no este registrado");
             messageError.setVisibleTime(250);
         }
+    }
+
+    public static void getLevelsAndReGenState(String email) {
+        UserDTO user = (UserDTO) new UserCRUD().select(email);
+        @SuppressWarnings("unchecked")
+        List<LevelDTO> levels = (List<LevelDTO>) new LevelCRUD().select(user.getCorreo());
+        State.setActualState(new SelectLevel(levels, user));
     }
 }
