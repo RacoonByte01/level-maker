@@ -39,7 +39,7 @@ public class Cube extends GameObjet {
         if (asset != null && image.isFile()) {
             this.asset = asset;
         } else {
-            this.asset = "assets/error/miss-assets.png";
+            this.asset = "assets/blocks/error/miss-assets.png";
         }
 
         this.angle = angle;

@@ -48,17 +48,17 @@ public class LeverCreatorState extends State {
             this.grid = new ArrayList<>();
             // Spawn of player
             // this.grid.add(new Player(new PVector(0, 0), new Color(255, 255, 255)));
-            this.grid.add(new Player(new PVector(0, 0), "assets/player/player.png"));
+            this.grid.add(new Player(new PVector(0, 0), "assets/blocks/player/player.png"));
         }
         Keyboard.key = null;
         LeverCreatorState.angle = 0;
         this.blockCards = new BlockCard[6];
-        blockCards[0] = new BlockCard(0, "assets/dirt/dirt.png");
-        blockCards[1] = new BlockCard(1, "assets/grass/grass-all.png");
-        blockCards[2] = new BlockCard(2, "assets/grass/grass-up.png");
-        blockCards[3] = new BlockCard(3, "assets/grass/grass-corner.png");
-        blockCards[4] = new BlockCard(4, "assets/grass/grass-up-down.png");
-        blockCards[5] = new BlockCard(5, "assets/grass/grass-up-down-side.png");
+        blockCards[0] = new BlockCard(0, "assets/blocks/dirt/dirt.png");
+        blockCards[1] = new BlockCard(1, "assets/blocks/grass/grass-all.png");
+        blockCards[2] = new BlockCard(2, "assets/blocks/grass/grass-up.png");
+        blockCards[3] = new BlockCard(3, "assets/blocks/grass/grass-corner.png");
+        blockCards[4] = new BlockCard(4, "assets/blocks/grass/grass-up-down.png");
+        blockCards[5] = new BlockCard(5, "assets/blocks/grass/grass-up-down-side.png");
     }
 
     @Override
