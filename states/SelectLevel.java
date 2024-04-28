@@ -56,7 +56,12 @@ public class SelectLevel extends State {
         buttons[2] = new Button(Settings.width * 4 / 6, Settings.height * 5 / 6, "Borrar Nivel", new Acttion() {
             @Override
             public void accionARealizar() {
-                // TODO States of delete level
+                if (LevelCard.getIdSelected() != null) {
+                    @SuppressWarnings("unchecked")
+                    LevelDTO levels = ((List<LevelDTO>) new LevelCRUD().select(LevelCard.getIdSelected()))
+                            .get(0);
+                    State.setActualState(new DeleteState(levels));
+                }
             }
         });
         buttons[3] = new Button(Settings.width * 4 / 6, Settings.height * 5 / 6 + Constants.tamButomY + 5,
