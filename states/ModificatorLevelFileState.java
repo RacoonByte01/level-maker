@@ -1,6 +1,7 @@
 package states;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
 import java.util.List;
 
 import db.crud.LevelCRUD;
@@ -21,7 +22,7 @@ import ui.TextBox;
 public class ModificatorLevelFileState extends State {
     LevelDTO level;
     private TextBox textBoxName;
-    private Button[] buttonSends = new Button[2];
+    private List<Button> buttonSends = new ArrayList<>();
     MessageError messageError;
 
     public ModificatorLevelFileState() {
@@ -35,12 +36,41 @@ public class ModificatorLevelFileState extends State {
         if (level != null) {
             this.level = level;
             textBoxName.setText(level.getNombre());
+            buttonSends.add(new Button(Settings.width * 3 / 5, Settings.height * 5 / 6, "Guardar Ajustes >",
+                    new Acttion() {
+                        @Override
+                        public void accionARealizar() {
+                            if (textBoxName.getText().length() == 0
+                                    && !textBoxName.getText().equals(level.getNombre())) {
+                                messageError.setText("Porfavor renombre su nivel");
+                                messageError.setVisibleTime(250);
+                            } else {
+                                // Update name in RAM obj and after update this in BD
+                                level.setNombre(textBoxName.getText());
+                                new LevelCRUD().update(level);
+                                State.setActualState(new LeverCreatorState(level));
+                            }
+                        }
+                    }));
+            buttonSends.add(new Button(Settings.width * 2 / 5, Settings.height * 5 / 6, "< Cancelar", new Acttion() {
+                @Override
+                public void accionARealizar() {
+                    State.setActualState(new LeverCreatorState(level));
+                }
+            }));
+            buttonSends.add(new Button(Settings.width / 2, Settings.height * 10 / 11, "< SALIR >",
+                    new Acttion() {
+                        @Override
+                        public void accionARealizar() {
+                            LoggingState.getLevelsAndReGenState(SelectLevel.user.getCorreo());
+                        }
+                    }));
         } else {
-            buttonSends[0] = new Button(Settings.width * 3 / 5, Settings.height * 5 / 6, "Crear >", new Acttion() {
+            buttonSends.add(new Button(Settings.width * 3 / 5, Settings.height * 5 / 6, "Crear >", new Acttion() {
                 @Override
                 public void accionARealizar() {
                     if (textBoxName.getText().length() == 0) {
-                        messageError.setText("Porfavor nombra al nivel");
+                        messageError.setText("Porfavor nombre su nivel");
                         messageError.setVisibleTime(250);
                     } else {
                         new LevelCRUD().insert(new LevelDTO(textBoxName.getText(), null, SelectLevel.user.getCorreo()));
@@ -49,13 +79,13 @@ public class ModificatorLevelFileState extends State {
                         State.setActualState(new SelectLevel(levels, SelectLevel.user));
                     }
                 }
-            });
-            buttonSends[1] = new Button(Settings.width * 2 / 5, Settings.height * 5 / 6, "< Cancelar", new Acttion() {
+            }));
+            buttonSends.add(new Button(Settings.width * 2 / 5, Settings.height * 5 / 6, "< Cancelar", new Acttion() {
                 @Override
                 public void accionARealizar() {
                     LoggingState.getLevelsAndReGenState(SelectLevel.user.getCorreo());
                 }
-            });
+            }));
         }
     }
 

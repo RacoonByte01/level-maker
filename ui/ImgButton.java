@@ -47,7 +47,6 @@ public class ImgButton extends Button {
         } else {
             col = null;
         }
-
         if (buttonPressed) {
             acttion.accionARealizar();
             Mouse.mousePressed = false;

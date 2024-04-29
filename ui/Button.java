@@ -45,7 +45,6 @@ public class Button {
         g.setColor(col);
         g.fillRect((int) loc.x - Constants.tamButomX / 2, (int) loc.y - Constants.tamButomY / 2, Constants.tamButomX,
                 Constants.tamButomY);
-
         g.setColor(new Color(255, 255, 255));
         Text.drawText(g, text, loc.x, loc.y - 5, true,
                 new Font("Dialog", Font.PLAIN, 18));
@@ -70,7 +69,6 @@ public class Button {
         } else {
             col = Constants.cols[4];
         }
-
         if (buttonPressed) {
             acttion.accionARealizar();
             Mouse.mousePressed = false;

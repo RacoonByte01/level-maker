@@ -65,7 +65,8 @@ public class LeverCreatorState extends State {
                 new Acttion() {
                     @Override
                     public void accionARealizar() {
-
+                        State.setActualState(new ModificatorLevelFileState(level));
+                        saveData();
                     }
                 });
     }
@@ -73,6 +74,7 @@ public class LeverCreatorState extends State {
     @Override
     public void update() {
         camera();
+        imgButton.update();
         for (BlockCard blockCard : blockCards) {
             blockCard.update(scroll);
         }
@@ -112,22 +114,20 @@ public class LeverCreatorState extends State {
                 }
             }
             /* Work in progress */
-            if (Keyboard.key != null && Keyboard.key == ' ') {
-                Keyboard.key = null;
-                State.setActualState(new GameState(grid));
-            } else if (Keyboard.key != null && Character.toLowerCase(Keyboard.key) == 'r') {
+            /*
+             * if (Keyboard.key != null && Keyboard.key == ' ') {
+             * Keyboard.key = null;
+             * State.setActualState(new GameState(grid));
+             * } else
+             */
+            if (Keyboard.key != null && Character.toLowerCase(Keyboard.key) == 'r') {
                 Keyboard.key = null;
                 angle = (angle + 1) % 4;
             } else if (Keyboard.key != null && Keyboard.key == 27) {
                 saveData();
-                @SuppressWarnings("unchecked")
-                List<LevelDTO> levels = (List<LevelDTO>) new LevelCRUD().select(SelectLevel.user.getCorreo());
-                State.setActualState(new SelectLevel(levels, SelectLevel.user));
+                LoggingState.getLevelsAndReGenState(SelectLevel.user.getCorreo());
             }
         }
-        // System.out.println("scroll: " + scroll + "\n" +
-        // BlockCard.getAssetSeleceted());
-        imgButton.update();
     }
 
     private void saveData() {
