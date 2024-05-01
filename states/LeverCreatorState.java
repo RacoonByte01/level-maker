@@ -65,8 +65,17 @@ public class LeverCreatorState extends State {
                 new Acttion() {
                     @Override
                     public void accionARealizar() {
-                        State.setActualState(new ModificatorLevelFileState(level));
-                        saveData();
+                        State.setActualState(new LoaddingState("Guardando", new Acttion() {
+                            @Override
+                            public void accionARealizar() {
+                                saveData();
+                            }
+                        }, new Acttion() {
+                            @Override
+                            public void accionARealizar() {
+                                State.setActualState(new ModificatorLevelFileState(level));
+                            }
+                        }));
                     }
                 });
     }

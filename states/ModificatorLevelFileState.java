@@ -47,8 +47,17 @@ public class ModificatorLevelFileState extends State {
                             } else {
                                 // Update name in RAM obj and after update this in BD
                                 level.setNombre(textBoxName.getText());
-                                new LevelCRUD().update(level);
-                                State.setActualState(new LeverCreatorState(level));
+                                State.setActualState(new LoaddingState("Guardando", new Acttion() {
+                                    @Override
+                                    public void accionARealizar() {
+                                        new LevelCRUD().update(level);
+                                    }
+                                }, new Acttion() {
+                                    @Override
+                                    public void accionARealizar() {
+                                        State.setActualState(new LeverCreatorState(level));
+                                    }
+                                }));
                             }
                         }
                     }));
@@ -69,14 +78,18 @@ public class ModificatorLevelFileState extends State {
             buttonSends.add(new Button(Settings.width * 3 / 5, Settings.height * 5 / 6, "Crear >", new Acttion() {
                 @Override
                 public void accionARealizar() {
-                    if (textBoxName.getText().length() == 0) {
+                    if (textBoxName.getText().trim().length() == 0) {
                         messageError.setText("Porfavor nombre su nivel");
                         messageError.setVisibleTime(250);
                     } else {
-                        new LevelCRUD().insert(new LevelDTO(textBoxName.getText(), null, SelectLevel.user.getCorreo()));
-                        @SuppressWarnings("unchecked")
-                        List<LevelDTO> levels = (List<LevelDTO>) new LevelCRUD().select(SelectLevel.user.getCorreo());
-                        State.setActualState(new SelectLevel(levels, SelectLevel.user));
+                        State.setActualState(new LoaddingState(State.getActualState(), "Creando", new Acttion() {
+                            @Override
+                            public void accionARealizar() {
+                                new LevelCRUD().insert(
+                                        new LevelDTO(textBoxName.getText(), null, SelectLevel.user.getCorreo()));
+                                LoggingState.getLevelsAndReGenState(SelectLevel.user.getCorreo());
+                            }
+                        }));
                     }
                 }
             }));

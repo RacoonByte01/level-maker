@@ -43,7 +43,12 @@ public class LoggingState extends State {
             @Override
             public void accionARealizar() {
                 try {
-                    loggin(textBoxs[0].getText(), textBoxs[1].getText());
+                    if (textBoxs[0].getText().length() != 0 && textBoxs[1].getText().length() != 0) {
+                        loggin(textBoxs[0].getText(), textBoxs[1].getText());
+                    } else {
+                        messageError.setText("¡Porfavor rellene todos los campos!");
+                        messageError.setVisibleTime(250);
+                    }
                 } catch (Exception e) {
                     messageError.setText("¡Error de conexión revise su conexion a internet!");
                     messageError.setVisibleTime(250);

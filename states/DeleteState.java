@@ -32,8 +32,17 @@ public class DeleteState extends State {
             buttons[1] = new Button(Settings.width * 2 / 5, Settings.height * 5 / 6, "Aceptar", new Acttion() {
                 @Override
                 public void accionARealizar() {
-                    new LevelCRUD().delete(level.getId());
-                    LoggingState.getLevelsAndReGenState(SelectLevel.user.getCorreo());
+                    State.setActualState(new LoaddingState("Borrando", new Acttion() {
+                        @Override
+                        public void accionARealizar() {
+                            new LevelCRUD().delete(level.getId());
+                        }
+                    }, new Acttion() {
+                        @Override
+                        public void accionARealizar() {
+                            LoggingState.getLevelsAndReGenState(SelectLevel.user.getCorreo());
+                        }
+                    }));
                 }
             });
         } else {
