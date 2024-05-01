@@ -18,7 +18,7 @@ public class Button {
     protected boolean buttonPressed, isEnable;
     protected String text;
     PVector loc;
-    Color col;
+    Color col, coltext;
     Acttion acttion;
 
     /**
@@ -35,6 +35,7 @@ public class Button {
         this.buttonPressed = false;
         this.acttion = acttion;
         this.isEnable = true;
+        this.coltext = new Color(255, 255, 255);
         LevelCard.restartIdSelected();
     }
 
@@ -47,7 +48,7 @@ public class Button {
         g.setColor(col);
         g.fillRect((int) loc.x - Constants.tamButomX / 2, (int) loc.y - Constants.tamButomY / 2, Constants.tamButomX,
                 Constants.tamButomY);
-        g.setColor(new Color(255, 255, 255));
+        g.setColor(coltext);
         Text.drawText(g, text, loc.x, loc.y - 5, true,
                 new Font("Dialog", Font.PLAIN, 18));
 
@@ -59,6 +60,7 @@ public class Button {
      */
     public void update() {
         if (isEnable) {
+            coltext = new Color(255, 255, 255);
             if (Mouse.x >= loc.x - Constants.tamButomX / 2
                     && Mouse.x <= loc.x - Constants.tamButomX / 2 + Constants.tamButomX &&
                     Mouse.y >= loc.y - Constants.tamButomY / 2
@@ -78,7 +80,9 @@ public class Button {
                 buttonPressed = false;
             }
         } else {
-            col = Constants.cols[22];
+            col = new Color(155, 155, 155, 20);
+            coltext = new Color(255, 255, 255, 20);
+
         }
     }
 

@@ -30,7 +30,7 @@ public class LoaddingState extends State {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                 }
                 System.out.println("Soy el hilo: " + Thread.currentThread().getName());
@@ -49,7 +49,7 @@ public class LoaddingState extends State {
             public void run() {
                 boolean action = false;
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                 }
                 try {
