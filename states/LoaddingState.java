@@ -33,7 +33,7 @@ public class LoaddingState extends State {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                 }
-                System.out.println("Soy el hilo: " + Thread.currentThread().getName());
+                // System.out.println("Soy el hilo: " + Thread.currentThread().getName());
                 backAct.accionARealizar();
             }
         });

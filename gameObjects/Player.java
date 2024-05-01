@@ -14,7 +14,7 @@ import raccoon.PVector;
 public class Player extends DinamicCube {
 
     public Player(PVector loc, Color col) {
-        super(loc, col, 30);
+        super(loc, col, 20);
         // Where g = y
         this.acc = new PVector(0, 4f);
 

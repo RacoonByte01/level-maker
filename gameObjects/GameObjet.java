@@ -37,4 +37,8 @@ public abstract class GameObjet implements Serializable {
      * This method will be use to calculate all related of maths
      */
     public abstract void update();
+
+    public PVector getLoc() {
+        return loc;
+    }
 }

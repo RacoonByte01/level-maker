@@ -71,7 +71,19 @@ public class ModificatorLevelFileState extends State {
                     new Acttion() {
                         @Override
                         public void accionARealizar() {
-                            LoggingState.getLevelsAndReGenState(SelectLevel.user.getCorreo());
+                            // Update name in RAM obj and after update this in BD
+                            level.setNombre(textBoxName.getText());
+                            State.setActualState(new LoaddingState("Guardando", new Acttion() {
+                                @Override
+                                public void accionARealizar() {
+                                    new LevelCRUD().update(level);
+                                }
+                            }, new Acttion() {
+                                @Override
+                                public void accionARealizar() {
+                                    LoggingState.getLevelsAndReGenState(SelectLevel.user.getCorreo());
+                                }
+                            }));
                         }
                     }));
         } else {

@@ -84,7 +84,12 @@ public class GameState extends State {
                 g.translate((int) -player.getLoc().x + Settings.width / 2,
                                 (int) -player.getLoc().y + Settings.height / 2);
                 for (Cube cube : grid) {
-                        cube.draw(g);
+                        if (cube.getLoc().x > player.getLoc().x - Settings.cellSize - Settings.width / 2 &&
+                                        cube.getLoc().x < player.getLoc().x + Settings.cellSize + Settings.width / 2 &&
+                                        cube.getLoc().y > player.getLoc().y - Settings.cellSize - Settings.height / 2 &&
+                                        cube.getLoc().y < player.getLoc().y + Settings.cellSize + Settings.height / 2) {
+                                cube.draw(g);
+                        }
                 }
         }
 
