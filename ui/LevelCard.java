@@ -73,6 +73,10 @@ public class LevelCard {
         return idSelected;
     }
 
+    public static void restartIdSelected() {
+        idSelected = null;
+    }
+
     public void notMouse() {
         if (idSelected != level.getId()) {
             colBox = colNotSelect;

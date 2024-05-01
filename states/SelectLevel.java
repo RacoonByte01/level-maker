@@ -28,6 +28,7 @@ public class SelectLevel extends State {
 
     public SelectLevel(List<LevelDTO> levels, UserDTO user) {
         SelectLevel.user = user;
+
         if (levels != null) {
             this.levels = levels;
             levelCards = new LevelCard[this.levels.size()];
@@ -105,6 +106,15 @@ public class SelectLevel extends State {
         /* Reset the scroll */
         Mouse.mouseWheelDown = false;
         Mouse.mouseWheelUp = false;
+        if (LevelCard.getIdSelected() == null) {
+            for (int i = 1; i < buttons.length; i++) {
+                buttons[i].setEnable(false);
+            }
+        } else {
+            for (int i = 1; i < buttons.length; i++) {
+                buttons[i].setEnable(true);
+            }
+        }
     }
 
     @Override

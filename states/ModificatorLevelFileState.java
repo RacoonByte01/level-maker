@@ -36,7 +36,7 @@ public class ModificatorLevelFileState extends State {
         if (level != null) {
             this.level = level;
             textBoxName.setText(level.getNombre());
-            buttonSends.add(new Button(Settings.width * 3 / 5, Settings.height * 5 / 6, "Guardar Ajustes >",
+            buttonSends.add(new Button(Settings.width * 3 / 5, Settings.height * 5 / 6, "Guardar y Seguir >",
                     new Acttion() {
                         @Override
                         public void accionARealizar() {
@@ -58,7 +58,7 @@ public class ModificatorLevelFileState extends State {
                     State.setActualState(new LeverCreatorState(level));
                 }
             }));
-            buttonSends.add(new Button(Settings.width / 2, Settings.height * 10 / 11, "< SALIR >",
+            buttonSends.add(new Button(Settings.width / 2, Settings.height * 10 / 11, "< GUARDAR Y SALIR >",
                     new Acttion() {
                         @Override
                         public void accionARealizar() {
@@ -94,6 +94,21 @@ public class ModificatorLevelFileState extends State {
         textBoxName.update();
         for (Button button : buttonSends) {
             button.update();
+        }
+        if (textBoxName.getText().trim().length() == 0) {
+            if (buttonSends.size() == 2) {
+                buttonSends.get(0).setEnable(false);
+            } else if (buttonSends.size() == 3) {
+                buttonSends.get(0).setEnable(false);
+                buttonSends.get(2).setEnable(false);
+            }
+        } else {
+            if (buttonSends.size() == 2) {
+                buttonSends.get(0).setEnable(true);
+            } else if (buttonSends.size() == 3) {
+                buttonSends.get(0).setEnable(true);
+                buttonSends.get(2).setEnable(true);
+            }
         }
         messageError.update();
     }

@@ -15,7 +15,7 @@ import settings.Constants;
  * @version 1.1
  */
 public class Button {
-    protected boolean buttonPressed;
+    protected boolean buttonPressed, isEnable;
     protected String text;
     PVector loc;
     Color col;
@@ -34,6 +34,8 @@ public class Button {
         this.text = text;
         this.buttonPressed = false;
         this.acttion = acttion;
+        this.isEnable = true;
+        LevelCard.restartIdSelected();
     }
 
     /**
@@ -56,23 +58,31 @@ public class Button {
      * read the mouse is in it...
      */
     public void update() {
-        if (Mouse.x >= loc.x - Constants.tamButomX / 2
-                && Mouse.x <= loc.x - Constants.tamButomX / 2 + Constants.tamButomX &&
-                Mouse.y >= loc.y - Constants.tamButomY / 2
-                && Mouse.y <= loc.y - Constants.tamButomY / 2 + Constants.tamButomY) {
-            col = Constants.cols[7];
-            if (Mouse.left && Mouse.mousePressed) {
-                buttonPressed = true;
+        if (isEnable) {
+            if (Mouse.x >= loc.x - Constants.tamButomX / 2
+                    && Mouse.x <= loc.x - Constants.tamButomX / 2 + Constants.tamButomX &&
+                    Mouse.y >= loc.y - Constants.tamButomY / 2
+                    && Mouse.y <= loc.y - Constants.tamButomY / 2 + Constants.tamButomY) {
+                col = Constants.cols[7];
+                if (Mouse.left && Mouse.mousePressed) {
+                    buttonPressed = true;
+                } else {
+                    buttonPressed = false;
+                }
             } else {
+                col = Constants.cols[4];
+            }
+            if (buttonPressed) {
+                acttion.accionARealizar();
+                Mouse.mousePressed = false;
                 buttonPressed = false;
             }
         } else {
-            col = Constants.cols[4];
+            col = Constants.cols[22];
         }
-        if (buttonPressed) {
-            acttion.accionARealizar();
-            Mouse.mousePressed = false;
-            buttonPressed = false;
-        }
+    }
+
+    public void setEnable(boolean isEnable) {
+        this.isEnable = isEnable;
     }
 }
