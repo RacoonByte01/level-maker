@@ -9,7 +9,7 @@ import windows.MainWindow;
  * Class how purpose is launch the program
  * 
  * @author JaviLeL
- * @version 1.0
+ * @version 1.1
  */
 public class Main {
     public static MainWindow mainWindow;
