@@ -1,5 +1,8 @@
 package main;
 
+import java.io.IOException;
+
+import db.crud.CRUD;
 import windows.MainWindow;
 
 /**
@@ -12,6 +15,11 @@ public class Main {
     public static MainWindow mainWindow;
 
     public static void main(String[] args) {
+        try {
+            CRUD.readData();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         mainWindow = new MainWindow();
         mainWindow.start();
     }

@@ -1,5 +1,9 @@
 package db.crud;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -7,11 +11,7 @@ import java.sql.SQLException;
 public abstract class CRUD {
     protected Connection connection;
     /* Data of DB */
-    private final String NAME_DB = "TFG_JAVIER";
-    private final String IP_DB = "javilel.ddns.net";
-    private final String PORT_DB = "2342";
-    private final String USER_DB = "tfg";
-    private final String PASS_DB = "pass";
+    private static String NAME_DB, IP_DB, PORT_DB, USER_DB, PASS_DB;
 
     public CRUD() {
         try {
@@ -35,4 +35,22 @@ public abstract class CRUD {
     abstract public boolean update(Object o);
 
     abstract public boolean delete(Object o);
+
+    public static void readData() throws IOException {
+        File file = new File("server.dat");
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            IP_DB = ignoreMetaData(br.readLine());
+            PORT_DB = ignoreMetaData(br.readLine());
+            NAME_DB = ignoreMetaData(br.readLine());
+            USER_DB = ignoreMetaData(br.readLine());
+            PASS_DB = ignoreMetaData(br.readLine());
+        }
+    }
+
+    private static String ignoreMetaData(String data) throws IOException {
+        String resultado;
+        resultado = data.substring(data.indexOf("=") + 2);
+        resultado = resultado.substring(0, resultado.length() - 1);
+        return resultado;
+    }
 }
