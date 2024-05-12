@@ -70,9 +70,14 @@ public class GameState extends State {
                         cube.update();
                 }
                 if (Keyboard.key != null && Keyboard.key == 27) {
-                        @SuppressWarnings("unchecked")
-                        List<LevelDTO> levels = (List<LevelDTO>) new LevelCRUD().select(SelectLevel.user.getCorreo());
-                        State.setActualState(new SelectLevel(levels, SelectLevel.user));
+                        try {
+                                @SuppressWarnings("unchecked")
+                                List<LevelDTO> levels = (List<LevelDTO>) new LevelCRUD()
+                                                .select(SelectLevel.user.getCorreo());
+                                State.setActualState(new SelectLevel(levels, SelectLevel.user));
+                        } catch (Exception e) {
+                                State.setActualState(new LoggingState());
+                        }
                 }
         }
 
