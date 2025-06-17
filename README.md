@@ -75,4 +75,4 @@ git clone https://github.com/RacoonByte01/level-maker.git
         jar -cvfm ../build/lever-maker.jar ../MANIFEST.MF *
         ```
 
-### [Usar el compilado](https://github.com/RacoonByte01/level-maker/releases/tag/v1.2)
+### [Usar el compilado](https://github.com/RacoonByte01/level-maker/releases/tag/v1.0)
