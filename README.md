@@ -60,7 +60,6 @@ git clone https://github.com/RacoonByte01/level-maker.git
         java -cp "../src/libs/mysql-connector-j-8.0.33.jar:" main/Main
         ```
 
-        > [!warning]
         > Si se usa un sistema **DOS** cambiar el caracter `:` por el caracter `;`.
 
     - Como un comprimido de java _(`.jar`)_:
